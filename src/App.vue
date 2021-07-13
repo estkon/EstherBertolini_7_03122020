@@ -1,85 +1,89 @@
-<!--
-
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
-</template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
--->
 <template>
 
     <div id ="app">
-        <nav class="navbar navbar-expand navbar-light fixed-top">
-            <div class="container">
-                <a href="#" class="navbar-brand"> Home  </a>   
-                <div class="collapse navbar-collapse" >
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link"> Login </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link"> Sign Up </a>
-                        </li>
-                    </ul>
+    <div class="nav">
+      <Nav />
+    </div>
+        <div class="auth-wrapper">
+                <div class="auth-inner">
+                    <router-view />
                 </div>
-            </div>
-        </nav>
+        </div>
     </div>
 </template>
 
 <script>
+import Nav from './components/Nav.vue'
+
 
 export default{
+    name:'App',
+    components:{
+      Nav
+    }
 
-    name:'App'
 }
 </script>
 
 
 <style>
 
-body {
-  background: #1C8EF9 ;
-  min-height: 100vh;
-  display: flex;
-  font-weight: 400;
+    @import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
 
-}
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background: #1C8EF9 ;
+      min-height: 100vh;
+      display: flex;
+      font-weight: 400;
+      font-family: 'Fira Sans', sans-serif;
+    }
 
-nav{
-  background:white;
+  h1,h2,h3,label,span{
+    font-weight: 500;
+    font-family: 'Fira Sans', sans-serif;
+  }
 
-}
+  body, html, #app, #roots, .auth-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
-.navbar-collapse {
-justify-content: flex-end;
-}
+  #app{
+    display: flex;
+
+  }
+
+  .navbar-light{
+    background-color: white;
+    box-shadow: blueviolet;
+  }
+    nav{
+      background:white;
+
+    }
+
+    .navbar-collapse {
+    justify-content: flex-end;
+    }
+
+    .auth-inner{
+      width: 450px; 
+      margin: auto;
+      background: white;
+      box-shadow: 0px 14px  80px blueviolet;
+      padding: 40px 55px 45px 55px;
+      border-radius: 15px;
+      transition: all .3s;
+      
+    }
+    img{
+    width: 30%;
+    margin: -3em 0em;
+    }
 
 </style>
