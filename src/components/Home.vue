@@ -11,3 +11,9 @@ export default{
     name:'Home'
 }
 </script>
+
+<style scoped>
+h3{
+    text-align: center;
+}
+</style>

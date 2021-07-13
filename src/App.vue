@@ -76,9 +76,10 @@ export default{
       margin: auto;
       background: white;
       box-shadow: 0px 14px  80px blueviolet;
-      padding: 40px 55px 45px 55px;
+      padding: 20px 25px 30px 25px;
       border-radius: 15px;
       transition: all .3s;
+      margin-top: 13em;
       
     }
     img{
