@@ -3,15 +3,15 @@
             <nav class="navbar navbar-expand navbar-light fixed-top">
             <div class="container">
                 
-                <a href="#" class="navbar-brand"> <img class="logo" src="../assets/logo.png" alt="Logo groupomania"> </a>   
+                <router-link to="/" class="navbar-brand"> <img class="logo" src="../assets/logo.png" alt="Logo groupomania"> </router-link>   
                  
                 <div class="collapse navbar-collapse" >
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link"> Login </a>
+                            <router-link to="/login" class="nav-link"> Login</router-link>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link"> SignUp </a>
+                            <router-link to="/signup" class="nav-link"> SignUp</router-link>
                         </li>
                     </ul>
                 </div>
