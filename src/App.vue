@@ -44,6 +44,7 @@ export default{
   h1,h2,h3,label,span{
     font-weight: 500;
     font-family: 'Fira Sans', sans-serif;
+    text-align: center;
   }
 
   body, html, #app, #roots, .auth-wrapper{
@@ -57,7 +58,9 @@ export default{
     display: flex;
 
   }
-
+  .form-group,h3{
+      margin-bottom: 0.5em;
+  }
   .navbar-light{
     background-color: white;
     box-shadow: blueviolet;
