@@ -20,7 +20,9 @@ import axios from 'axios'
 export default{
     name:'App',
     components:{
+
       Nav,
+      
     },
       data (){
         return{

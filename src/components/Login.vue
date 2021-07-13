@@ -1,6 +1,9 @@
 <template>
 
     <form @submit.prevent="handleSubmit">
+        <div v-if="error" class="alert alert-danger" role="alert">
+            {{ error}}
+        </div>
         <h3>Login</h3>
 
         <div class="form-group">
@@ -25,11 +28,14 @@
          data(){
            return{
                    email:'',
-                   password:''
+                   password:'',
+                   error:''
            }
         },
                 methods: {
                 async handleSubmit() {
+                    try{
+
                          const response= await axios.post('login', {
                                 email: this.email ,
                                 password: this.password
@@ -39,6 +45,9 @@
                         localStorage.setItem('token',response.data.token);
                         this.$store.dispatch('user', response.data.user);            
                         this.$router.push('/');
+                    }catch (e){
+                        this.error ='Invalid username/password!'
+                    }
                     }
         }
     }

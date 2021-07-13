@@ -35,6 +35,8 @@ export default {
         handleClick(){
             // déconnexion donc suppression du token
             localStorage.removeItem('token');
+            //gestion du logout changement de la nav
+            this.$store.dispatch('user', null);
             //retour à la page principale
             this.$router.push('/');
         }
