@@ -48,7 +48,7 @@ export default{
       box-sizing: border-box;
     }
     body {
-      background: #1C8EF9 ;
+      background: #f05454 ;
       min-height: 100vh;
       display: flex;
       font-weight: 400;
