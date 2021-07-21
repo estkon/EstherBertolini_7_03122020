@@ -8,6 +8,7 @@
       <input
         type="email"
         class="form-control"
+        v-model="email"
         placeholder="Email"
       />
     </div>
@@ -22,14 +23,14 @@
       />
     </div>
 
-    <button class="btn btn-primary btn-block">Login</button>
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
 
   </form>
 </template>
 
 <script>
 import axios from "axios";
-import Error from "./Error.vue";
+import Error from "../components/Error.vue";
 
 export default {
   name: "Login",
@@ -46,13 +47,15 @@ export default {
   methods: {
     async handleSubmit() {
       try {
-        const response = await axios.post("login", {
+        const response = await axios.post("http://localhost:8000/api/user/login", {
           email: this.email,
           password: this.password,
         });
+        console.log(response.data)
         //envoi du token
         localStorage.setItem("token", response.data.token);
-        this.$store.dispatch("user", response.data.user);
+        localStorage.setItem("user",JSON.stringify(response.data.user) );
+        this.$store.dispatch("user",response.data.user);
         this.$router.push("/");
       } catch (e) {
         this.error = "Invalid username/password!";

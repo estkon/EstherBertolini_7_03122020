@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.post.belongsTo(models.user)// le modèle post peut avoir plusieur user
       models.post.hasMany(models.like) // le modèle post peut avoir plusieur like
+      models.post.hasMany(models.commentary) // le modèle post peut avoir plusieur like
     }
   };
   post.init({

@@ -1,34 +1,37 @@
 <template>
-    
-    <form>
-    
+  <form @submit.prevent="submitPost">
     <h3>Post</h3>
 
     <div class="form-group">
       <label>Title</label>
       <input
-        type="title"
+        type="text"
         class="form-control"
         v-model="title"
         placeholder="Title"
-        />
+      />
     </div>
+
+    <div class="form-group">
+      <label>Image</label>
+      <input type="file" class="form-control" @change="setImageFile" />
+    </div>
+
     <div class="form-group">
       <label>Post</label>
-     <textarea class="form-control" name="post" >
-      
-    </textarea>
-
+      <textarea v-model="post" class="form-control" name="post"> </textarea>
     </div>
 
+    <div v-if="url">
+      <img class="imagePreview" :src="url" width="100px" />
+    </div>
 
-
-        <button class="btn btn-primary btn-block">Send</button>
-
+    <button type="submit" class="btn btn-primary btn-block">Send</button>
   </form>
 </template>
 
 <script>
+import axios from "axios";
 
 
 export default {
@@ -37,16 +40,38 @@ export default {
   data() {
     return {
       title: "",
-      post: ""
+      post: "",
+      image: "",
+      url: "",
     };
   },
-}
+  methods: {
+    submitPost: function () {
+      let formData = new FormData();
+      formData.append(
+        "post",
+        JSON.stringify({ title: this.title, post: this.post, userId: JSON.parse(localStorage.getItem("user")).id })
+      );
+      formData.append("image", this.image);
+      axios.post("http://localhost:8000/api/post", formData, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      }) .then(()=> {
+      window.location.href = "/"
+    }).catch(err => console.log(err))
+
+
+    },
+    setImageFile: function (event) {
+      this.image = event.target.files[0];
+      this.url = URL.createObjectURL(this.image);
+    },
+  },
+};
 </script>
 
 <style scoped>
-span{
-    word-wrap: break-word;
-    height: fit-content;
+span {
+  word-wrap: break-word;
+  height: fit-content;
 }
-
 </style>

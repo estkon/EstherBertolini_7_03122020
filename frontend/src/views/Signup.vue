@@ -35,20 +35,20 @@
     <div class="form-group">
       <label>Password</label>
       <input
-        type="text"
+        type="password"
         class="form-control"
         v-model="password"
         placeholder="Password"
       />
     </div>
 
-    <button class="btn btn-primary btn-block">SignUp</button>
+    <button type="submit" class="btn btn-primary btn-block">SignUp</button>
   </form>
 </template>
 
 <script>
 import axios from "axios";
-import Error from "./Error.vue";
+import Error from "../components/Error.vue";
 
 export default {
   name: "Signup",
@@ -68,17 +68,31 @@ export default {
 
   methods: {
     async handleSubmit() {
-      try {
-        await axios.post("signup", {
-          first_name: this.first_name,
-          last_name: this.last_name,
-          email: this.email,
-          password: this.password,
-        });
-        //renvoyer l'utilisateur vers le login
-        this.$router.push("/login");
-      } catch (e) {
-        this.error = "error occurred !";
+      if (
+        this.first_name !="" &&
+        this.last_name !="" &&
+        this.email !="" &&
+        this.password !=""
+      ) {
+         axios
+          .post("http://localhost:8000/api/user/signup", {
+            firstname: this.first_name,
+            lastname: this.last_name,
+            email: this.email,
+            password: this.password,
+          })
+          .then(() => {
+            //renvoyer l'utilisateur vers le login
+            this.$router.push("/login");
+          })
+
+          .catch(() => {
+            this.error = "Veuillez remplir tous les champs!";
+          });
+
+      } else {
+        this.error = "Veuillez remplir tous les champs";
+       
       }
     },
   },

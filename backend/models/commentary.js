@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       models.commentary.belongsTo(models.user)
+      models.commentary.belongsTo(models.post)
     }
   };
   commentary.init({

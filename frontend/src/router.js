@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './components/Home.vue'
-import Login from './components/Login.vue'
-import Signup from './components/Signup.vue'
-import Profil from './components/Profil.vue'
+import Home from './views/Home.vue'
+import Login from './views/Login.vue'
+import Signup from './views/Signup.vue'
+import Profil from './views/Profil.vue'
 import Post from './components/Post.vue'
 
 Vue.use(Router)
