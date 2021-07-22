@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="/"><img src="../assets/logo.png" width="60"></a>
+      <a class="navbar-brand" href="/"><img src="../assets/logo-blanc.png" width="150"></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -14,58 +14,92 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div v-if="user">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+          <!--Utilisé cette nav si user connecté-->
+        <!-- <div v-if = "user"> -->
+          <ul v-if = "user" class="navbar-nav ml-auto mb-2 mb-lg-0" >
             <li class="nav-item">
-              <a class="nav-link active" aria-current="/profil" href="#"
+              <a class="nav-link active" aria-current="/profil" href="/profil"
                 >Profil</a
               >
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="/post" href="#">Post</a>
+            <li class="nav-item ">
+              <a class="nav-link active" aria-current="/post" href="/post">Post</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="/logout" href="#"
+              <a @click="logoutClick" class="nav-link active" aria-current="/logout" href="/login"
                 >Logout</a
               >
             </li>
           </ul>
-        </div>
-        <div v-if="!user">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+       
+                <!--Utilisé cette nav si user non connecté-->
+        <!-- <div v-if = "!user" > -->
+          <ul v-if = "!user" class="navbar-nav me-auto mb-2 mb-lg-0" >
             <li class="nav-item">
-              <a class="nav-link active" aria-current="/login" href="#"
+              <a class="nav-link active" aria-current="/login" href="/login"
                 >Login</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="/signup" href="#"
+              <a class="nav-link active" aria-current="/signup" href="/signup"
                 >Signup</a
               >
             </li>
           </ul>
+          
         </div>
       </div>
-    </div>
+    
   </nav>
 </template>
 
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
-  name: "Nav",
-  props: ["user"],
-
-  methods: {
-    Logout() {
-      localStorage.clear();
-      window.location.href = "/login";
+    name: 'Nav',
+       
+    methods: {
+        logoutClick(){
+            // déconnexion donc suppression du token
+            localStorage.removeItem('token');
+            //gestion du logout changement de la nav
+            this.$store.dispatch('user', null);
+            //retour à la page principale
+            this.$router.push('/');
+        }
     },
-  },
-};
+    computed: {
+        ...mapGetters(['user'])
+    }
+}
+//   name: "Nav",
+//   props: ["user"],
+
+//   methods: {
+//     Logout() {
+//       localStorage.clear();
+//       window.location.href = "/login";
+//     },
+//   },
+
+    // created(){
+    // if(localStorage.getItem("user")){
+    //         this.user = JSON.parse(localStorage.getItem("user"))
+    //     }
+    // }
+// }
+
 </script>
 
 
 <style scoped>
-
+.navbar{
+    background-color: #f05454;
+}
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
+    color:white;
+}
 </style>
