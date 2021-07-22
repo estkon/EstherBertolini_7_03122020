@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
           <!--Utilisé cette nav si user connecté-->
-        <!-- <div v-if = "user"> -->
+        
           <ul v-if = "user" class="navbar-nav ml-auto mb-2 mb-lg-0" >
             <li class="nav-item">
               <a class="nav-link active" aria-current="/profil" href="/profil"
@@ -35,7 +35,7 @@
         
        
                 <!--Utilisé cette nav si user non connecté-->
-        <!-- <div v-if = "!user" > -->
+        
           <ul v-if = "!user" class="navbar-nav me-auto mb-2 mb-lg-0" >
             <li class="nav-item">
               <a class="nav-link active" aria-current="/login" href="/login"
@@ -75,22 +75,7 @@ export default {
         ...mapGetters(['user'])
     }
 }
-//   name: "Nav",
-//   props: ["user"],
 
-//   methods: {
-//     Logout() {
-//       localStorage.clear();
-//       window.location.href = "/login";
-//     },
-//   },
-
-    // created(){
-    // if(localStorage.getItem("user")){
-    //         this.user = JSON.parse(localStorage.getItem("user"))
-    //     }
-    // }
-// }
 
 </script>
 

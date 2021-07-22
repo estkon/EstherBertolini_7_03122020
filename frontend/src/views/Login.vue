@@ -56,7 +56,7 @@ export default {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user",JSON.stringify(response.data.user) );
         this.$store.dispatch("user",response.data.user);
-        window.location.href = "/"
+        this.$router.push("/")
       } catch (e) {
         this.error = "Invalid username/password!";
       }
