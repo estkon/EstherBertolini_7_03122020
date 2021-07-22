@@ -5,6 +5,8 @@ import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
 import Profil from './views/Profil.vue'
 import Post from './components/Post.vue'
+import PostCard from './components/PostCard.vue'
+
 
 Vue.use(Router)
 
@@ -15,7 +17,10 @@ export default new Router({
         {path:'/Login', component: Login},
         {path:'/Signup', component: Signup},
         {path:'/Profil', component: Profil},
-        {path:'/Post', component: Post}
+        {path:'/Post', component: Post},
+        {path:'/PostCard', component: PostCard},
+        
+        
     ]
 })
 

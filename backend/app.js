@@ -14,7 +14,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express());
-app.use('images',express.static(path.join(__dirname, '/images')));
+app.use('/images',express.static(path.join(__dirname, '/images')));
 app.use('/api/user', routerUser);
 app.use('/api/post', routerPost);
 

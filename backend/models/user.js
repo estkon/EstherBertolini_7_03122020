@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       models.user.hasMany(models.post)
       models.user.hasMany(models.commentary)
       models.user.hasMany(models.like)
-
     }
   };
   user.init({

@@ -1,67 +1,71 @@
 <template>
-
-            <nav class="navbar navbar-expand navbar-light fixed-top">
-            <div class="container">
-                
-                <router-link to="/" class="navbar-brand"> <img class="logo" src="../assets/logo.png" alt="Logo groupomania"> </router-link>   
-                 
-                <div class="collapse navbar-collapse" >
-                    <ul class="navbar-nav ml-auto" v-if="!user">
-                        <li class="nav-item">
-                            <router-link to="/login" class="nav-link"> Login</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/signup" class="nav-link"> SignUp</router-link>
-                        </li>
-                    </ul>
-                    <!-- Navigation si user connecté -->
-                     <ul class="navbar-nav ml-auto" v-if="user">
-                        <li class="nav-item">
-                            <router-link to="/Profil" class="nav-link"> Profil</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link to="/Post" class="nav-link"> Post</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <a href="javascript:void(0)" @click="handleClick" class="nav-link"> Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/"><img src="../assets/logo.png" width="60"></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div v-if="user">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="/profil" href="#"
+                >Profil</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="/post" href="#">Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="/logout" href="#"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div v-if="!user">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="/login" href="#"
+                >Login</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="/signup" href="#"
+                >Signup</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
 </template>
 
 
 <script>
-import {mapGetters} from 'vuex'
 export default {
-    name: 'Nav',
+  name: "Nav",
+  props: ["user"],
 
-       
-    methods: {
-        handleClick(){
-            // déconnexion donc suppression du token
-            localStorage.removeItem('token');
-            //gestion du logout changement de la nav
-            this.$store.dispatch('user', null);
-            //retour à la page principale
-            this.$router.push('/');
-        }
+  methods: {
+    Logout() {
+      localStorage.clear();
+      window.location.href = "/login";
     },
-    computed: {
-        ...mapGetters(['user'])
-    }
-}
+  },
+};
 </script>
 
 
 <style scoped>
-  img{
-      display: flex;
-      justify-content: center;
-  }
 
-  .navbar .navbar-expand .navbar-light .fixed-top{
-      max-height: 150px;
-  }
 </style>

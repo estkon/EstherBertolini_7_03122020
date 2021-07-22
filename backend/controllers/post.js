@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 let Post = require("../models").post
+let User = require("../models").user
+let Commentary = require("../models").commentary
+let Likes = require("../models").likes
 
 exports.createPost = (req, res, next) =>{
     req.body.post = JSON.parse(req.body.post);
@@ -22,3 +25,12 @@ exports.createPost = (req, res, next) =>{
 
 
 }
+exports.getAllPosts = (req, res, next) => {
+    Post.findAll({include:[User]})
+      .then(posts => res.status(200).json(posts))
+      .catch(error => {
+          console.log(error);
+          res.status(500).json("error getAllPosts")
+      });
+  };
+  
