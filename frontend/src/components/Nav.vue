@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="/"><img src="../assets/logo-blanc.png" width="150"></a>
+      <router-link class="navbar-brand" to="/"><img src="../assets/logo-blanc.png" width="150"></router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -17,14 +17,13 @@
 
           <!--Utilisé cette nav si user connecté-->
         
-          <ul v-if = "user" class="navbar-nav ml-auto mb-2 mb-lg-0" >
+          <ul v-if="user" class="navbar-nav ml-auto mb-2 mb-lg-0" >
             <li class="nav-item">
-              <a class="nav-link active" aria-current="/profil" href="/profil"
-                >{{user.firstname}} {{user.lastname}}</a
-              >
+              <router-link  class="nav-link" to="/profil"
+                >{{user.firstname}} {{user.lastname}}</router-link>
             </li>
             <li class="nav-item ">
-              <a class="nav-link active" aria-current="/post" href="/post"> Créer un Post</a>
+              <router-link class="nav-link active"  to="/post"> Créer un Post</router-link>
             </li>
             <li class="nav-item">
               <a @click="logoutClick" class="nav-link active" aria-current="/logout" href="/login"
@@ -36,15 +35,15 @@
        
                 <!--Utilisé cette nav si user non connecté-->
         
-          <ul v-if = "!user" class="navbar-nav me-auto mb-2 mb-lg-0" >
+          <ul v-if="!user" class="navbar-nav me-auto mb-2 mb-lg-0" >
             <li class="nav-item">
-              <a class="nav-link active" aria-current="/login" href="/login"
-                >Connexion</a
+              <router-link class="nav-link active"  to="/login"
+                >Connexion</router-link
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="/signup" href="/signup"
-                >Inscription</a
+              <router-link class="nav-link active"  to="/signup"
+                >Inscription</router-link
               >
             </li>
           </ul>
@@ -60,7 +59,13 @@
 import {mapGetters} from 'vuex'
 export default {
     name: 'Nav',
-       
+        computed: {
+        ...mapGetters(["user"]),
+    },
+      data(){
+        return{
+        }
+      },
     methods: {
         logoutClick(){
             // déconnexion donc suppression du token
@@ -71,9 +76,8 @@ export default {
             this.$router.push('/');
         }
     },
-    computed: {
-        ...mapGetters(['user'])
-    }
+
+
 }
 
 
@@ -84,7 +88,7 @@ export default {
 .navbar{
     background-color: #f05454;
 }
-.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
+.navbar-light .navbar-nav .nav-link{
     color:white;
 }
 </style>

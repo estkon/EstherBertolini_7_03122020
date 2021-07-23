@@ -35,7 +35,11 @@ export default {
     //récupération des posts depuis la BDD via axios
      created(){
          axios.get('http://localhost:8000/api/post') 
-            .then( response => this.posts = response.data)
+            .then( response => {
+                console.log(response)
+                this.posts = response.data
+
+            })
             .catch( error => console.log(error));
      }
 };

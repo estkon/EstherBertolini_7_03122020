@@ -1,17 +1,17 @@
 <template>
-
-  <div class="card text-dark bg-light mb-3" >
-  <div class="card-header">
-      <p>{{post.user.firstname}} {{post.user.lastname}} {{post.user.date}}</p>
+  
+  <div v-if="post" class="card text-dark bg-light mb-3" >
+    <div class="card-header">
+        <p v-if="post.user">{{post.user.firstname}} {{post.user.lastname}} {{post.user.date}}</p>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5>
+      
+          <img class="card-img"  :src="'http://localhost:8000'+post.image" alt="Card image cap" />
+      
+      <p class="card-text">{{post.content}}</p>
+    </div>
   </div>
-  <div class="card-body">
-    <h5 class="card-title">{{post.title}}</h5>
-    
-        <img class="card-img"  :src="'http://localhost:8000'+post.image" alt="Card image cap" />
-    
-    <p class="card-text">{{post.content}}</p>
-  </div>
-</div>
 </template>
 
 <script>

@@ -1,12 +1,8 @@
 <template>
   <div id="app">
-    
-      <Nav :user= "user"/>
-
+      <Nav />
     <div class="container pt-5">
-     
-             <router-view />
-
+      <router-view />
     </div>
 
   </div>
@@ -28,26 +24,8 @@ export default {
       user: null,
     };
   },
-  methods:{
-  checkLoggedUser: function () {
-    //Si user pas connecté => login
-      if ( !localStorage.getItem("user")) {
-      this.$router.push("/login");
-      }// Si user connecté => recupération data user ds LS
-      else{
-        this.user = JSON.parse(localStorage.getItem("user"))
-      }
-    },
-  },
-  
-  created() {
-    this.checkLoggedUser();
-  },
-
-     };
+};
 </script>
-
-
 <style>
 .container{
     display: flex;

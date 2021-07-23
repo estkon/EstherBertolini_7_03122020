@@ -1,5 +1,5 @@
 <template>
-      <form>
+      <form >
     
     <h3>Votre Compte</h3>
 
@@ -8,7 +8,7 @@
       <input
         type="name"
         class="form-control"
-        v-model="Lastname"
+        v-model="firstname"
         placeholder="Name"
         />
     </div>
@@ -18,7 +18,7 @@
       <input
         type="name"
         class="form-control"
-        v-model="Lastname"
+        v-model="lastname"
         placeholder="Name"
         />
     </div>
@@ -51,19 +51,25 @@
 </template>
 
 <script>
-
+import {mapGetters} from 'vuex'
 
 export default {
   name: "Profil",
 
+    computed: {
+        ...mapGetters(['user'])
+    },
+
   data() {
     return {
-      name: "",
+      firstname: "",
+      lastname: "",
       email: "",
       password: "",
       error: "",
     };
   },
+
 }
 </script>
 

@@ -24,7 +24,6 @@
     </div>
 
     <button type="submit" class="btn btn-primary btn-block">Login</button>
-
   </form>
 </template>
 
@@ -44,22 +43,23 @@ export default {
       error: "",
     };
   },
-  methods: {
-    async handleSubmit() {
-      try {
-        const response = await axios.post("http://localhost:8000/api/user/login", {
+  methods:{
+    handleSubmit() {
+      axios
+        .post("http://localhost:8000/api/user/login", {
           email: this.email,
           password: this.password,
+        })
+        .then((response) => {
+          //envoi du token
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+          this.$store.dispatch("user", response.data.user);
+          this.$router.push("/");
+        })
+        .catch((e) => {
+          this.error = "Invalid username/password!" + e;
         });
-        console.log(response.data)
-        //envoi du token
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user",JSON.stringify(response.data.user) );
-        this.$store.dispatch("user",response.data.user);
-        this.$router.push("/home")
-      } catch (e) {
-        this.error = "Invalid username/password!";
-      }
     },
   },
 };
@@ -68,6 +68,6 @@ export default {
 <style scoped>
 .btn {
   background-color: #f05454;
-  color:white;
+  color: white;
 }
 </style>
