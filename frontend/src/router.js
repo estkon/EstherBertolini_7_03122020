@@ -13,12 +13,13 @@ Vue.use(Router)
 export default new Router({
     mode:'history', //pour enlever le # du path
     routes: [
-        {path:'/', component: Home},
+        {path:'/', component: Login},
         {path:'/Login', component: Login},
         {path:'/Signup', component: Signup},
         {path:'/Profil', component: Profil},
         {path:'/Post', component: Post},
         {path:'/PostCard', component: PostCard},
+        {path:'/Home', component: Home},
         
         
     ]

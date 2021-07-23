@@ -6,7 +6,9 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
-    <img class="card-img"  :src="'http://localhost:8000'+post.image" alt="Card image cap" />
+    
+        <img class="card-img"  :src="'http://localhost:8000'+post.image" alt="Card image cap" />
+    
     <p class="card-text">{{post.content}}</p>
   </div>
 </div>
@@ -25,13 +27,25 @@ export default {
 </script>
 
 <style  scoped>
-.card{
-        width: 80%;
-}
+
 .card-body {
   display: flex;
   flex-direction: column;
   align-content: space-between;
   text-align: center;
+}
+h5{
+    color:#f05454;
+}
+.card-text{
+    color:#30475e;
+}
+
+img{
+  width:40%;
+  height:40%;
+  border: 1px solid  #f05454;
+  margin:auto;
+  
 }
 </style>
