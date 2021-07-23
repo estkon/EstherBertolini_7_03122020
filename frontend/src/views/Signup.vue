@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <error v-if="error" :error="error" />
-    <h3>SignUp</h3>
+    <h3>Inscription</h3>
 
     <div class="form-group">
       <label>FirstName</label>
@@ -42,7 +42,7 @@
       />
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">SignUp</button>
+    <button type="Envoyer" class="btn btn btn-block">SignUp</button>
   </form>
 </template>
 
@@ -98,3 +98,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.btn {
+  background-color: #f05454;
+  color:white;
+}
+</style>

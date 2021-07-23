@@ -1,7 +1,7 @@
 <template>
-<div>
+<div class="postList">
 
-        <div v-if= "posts">
+        <div  v-if= "posts">
             <div v-for = "post in posts" :key= "post.id">
                 <PostCard :post="post"/>
             </div>
@@ -43,5 +43,9 @@ export default {
 </script>
 
 <style scoped>
+.postList{
+        width: 80%;
+        margin:auto;
+}
 
 </style>

@@ -20,15 +20,15 @@
           <ul v-if = "user" class="navbar-nav ml-auto mb-2 mb-lg-0" >
             <li class="nav-item">
               <a class="nav-link active" aria-current="/profil" href="/profil"
-                >Profil</a
+                >{{user.firstname}} {{user.lastname}}</a
               >
             </li>
             <li class="nav-item ">
-              <a class="nav-link active" aria-current="/post" href="/post">Post</a>
+              <a class="nav-link active" aria-current="/post" href="/post"> Créer un Post</a>
             </li>
             <li class="nav-item">
               <a @click="logoutClick" class="nav-link active" aria-current="/logout" href="/login"
-                >Logout</a
+                >Déconnexion</a
               >
             </li>
           </ul>
@@ -39,12 +39,12 @@
           <ul v-if = "!user" class="navbar-nav me-auto mb-2 mb-lg-0" >
             <li class="nav-item">
               <a class="nav-link active" aria-current="/login" href="/login"
-                >Login</a
+                >Connexion</a
               >
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="/signup" href="/signup"
-                >Signup</a
+                >Inscription</a
               >
             </li>
           </ul>

@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <error v-if="error" :error="error" />
-    <h3>Login</h3>
+    <h3>Connexion</h3>
 
     <div class="form-group">
       <label>Email</label>
@@ -64,3 +64,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.btn {
+  background-color: #f05454;
+  color:white;
+}
+</style>

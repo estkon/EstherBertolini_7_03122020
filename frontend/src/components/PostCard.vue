@@ -1,8 +1,8 @@
 <template>
 
-  <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+  <div class="card text-dark bg-light mb-3" >
   <div class="card-header">
-      <p>{{post.user.firstname}} {{post.user.lastname}}</p>
+      <p>{{post.user.firstname}} {{post.user.lastname}} {{post.user.date}}</p>
   </div>
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
@@ -25,6 +25,9 @@ export default {
 </script>
 
 <style  scoped>
+.card{
+        width: 80%;
+}
 .card-body {
   display: flex;
   flex-direction: column;

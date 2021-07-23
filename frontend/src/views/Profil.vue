@@ -1,17 +1,28 @@
 <template>
       <form>
     
-    <h3>Profil</h3>
+    <h3>Votre Compte</h3>
 
     <div class="form-group">
-      <label>Name</label>
+      <label>Prénom</label>
       <input
         type="name"
         class="form-control"
-        v-model="name"
+        v-model="Lastname"
         placeholder="Name"
         />
     </div>
+
+        <div class="form-group">
+      <label>Nom</label>
+      <input
+        type="name"
+        class="form-control"
+        v-model="Lastname"
+        placeholder="Name"
+        />
+    </div>
+
     <div class="form-group">
       <label>Email</label>
       <input
@@ -33,8 +44,8 @@
     </div>
 
     <div class="btn-group">
-        <button class="btn btn-primary btn-block">Save</button>
-        <button class="btn btn-primary btn-block">Delete account</button>
+        <button class="btn btn-primary btn-block">Enregistrer</button>
+        <button class="btn btn-primary btn-block">Supprimer le compte</button>
     </div>
   </form>
 </template>
@@ -65,6 +76,11 @@ button{
     display: flex;
     justify-content: space-between;
     margin-top: 1em;
+}
+
+.btn {
+  background-color: #f05454;
+  color:white;
 }
 
 </style>
