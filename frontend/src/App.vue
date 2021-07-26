@@ -10,14 +10,17 @@
 
 <script>
 import Nav from "./components/Nav.vue";
-
-
 // import axios from 'axios'
-
 export default {
   name: "App",
   components: {
     Nav,
+  },
+  created() {
+    if(localStorage.getItem('user') != undefined){
+      this.$store.dispatch('user', JSON.parse(localStorage.getItem('user')))
+      this.$router.push("/");
+    }
   },
   data() {
     return {

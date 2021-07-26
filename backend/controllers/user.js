@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const CryptoJS = require('crypto-js');
 
-const User = require('../models').user; //récupérer le modèle User
+const User = require('../models').User; //récupérer le modèle User
 
 exports.signup = (req, res, next) => {
 
@@ -19,7 +19,7 @@ exports.signup = (req, res, next) => {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: encrypted,
-        password: hash
+        password: hash,
       })
         .then(()=>{
           res.status(201).json({succes:" user"})

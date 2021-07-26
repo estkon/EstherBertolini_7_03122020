@@ -56,7 +56,7 @@ export default {
       axios.post("http://localhost:8000/api/post", formData, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") },
       }) .then(()=> {
-      window.location.href = "/"
+      this.$router.push("/")
     }).catch(err => console.log(err))
 
 

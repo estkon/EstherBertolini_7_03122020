@@ -2,19 +2,22 @@
   
   <div v-if="post" class="card text-dark bg-light mb-3" >
     <div class="card-header">
-        <p v-if="post.user">{{post.user.firstname}} {{post.user.lastname}} {{post.user.date}}</p>
+        <p v-if="post.User">{{post.User.firstname}} {{post.User.lastname}} {{post.createdAt|formatDate}}</p>
+        <div v-if="post.User.isAdmin || post.User.id == user.id">
+          <button class="btn btn-sm btn-danger" @click="supprimerPost"><span class="fa fa-trash"></span>Supprimer</button>
+        </div>
     </div>
     <div class="card-body">
       <h5 class="card-title">{{post.title}}</h5>
-      
-          <img class="card-img"  :src="'http://localhost:8000'+post.image" alt="Card image cap" />
-      
+          <img class="card-img" :src="'http://localhost:8000'+post.image" alt="Card image cap" />
       <p class="card-text">{{post.content}}</p>
     </div>
   </div>
 </template>
 
 <script>
+import {mapGetters} from "vuex" 
+import axios from 'axios'
 export default {
   name: "PostCard",
   props: ["post"],
@@ -23,6 +26,19 @@ export default {
       image: null,
     };
   },
+  methods:{
+    supprimerPost(){
+      let postId = this.post.id
+      axios.delete("http://localhost:8000/api/post/" + postId)
+      .then(() => {
+          window.location.href="/"
+      })
+      .catch(err => console.log(err))
+    }
+  },
+  computed:{
+    ...mapGetters(['user'])
+  }
 };
 </script>
 

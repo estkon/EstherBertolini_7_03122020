@@ -1,5 +1,5 @@
 <template>
-      <form >
+      <form>
     
     <h3>Votre Compte</h3>
 
@@ -51,25 +51,21 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+
 
 export default {
   name: "Profil",
 
-    computed: {
-        ...mapGetters(['user'])
-    },
-
   data() {
     return {
-      firstname: "",
-      lastname: "",
+      name: "",
+      firstname:"",
+      lastname:"",
       email: "",
       password: "",
       error: "",
     };
   },
-
 }
 </script>
 

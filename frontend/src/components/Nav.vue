@@ -69,7 +69,7 @@ export default {
     methods: {
         logoutClick(){
             // déconnexion donc suppression du token
-            localStorage.removeItem('token');
+            localStorage.clear();
             //gestion du logout changement de la nav
             this.$store.dispatch('user', null);
             //retour à la page principale
@@ -88,7 +88,7 @@ export default {
 .navbar{
     background-color: #f05454;
 }
-.navbar-light .navbar-nav .nav-link{
-    color:white;
+.navbar-light .navbar-nav .nav-link {
+    color: white;
 }
 </style>
