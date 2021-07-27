@@ -1,3 +1,4 @@
+<!--page inscription-->
 <template>
   <form @submit.prevent="handleSubmit">
     <error v-if="error" :error="error" />

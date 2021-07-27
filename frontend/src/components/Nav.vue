@@ -23,7 +23,7 @@
                 >{{user.firstname}} {{user.lastname}}</router-link>
             </li>
             <li class="nav-item ">
-              <router-link class="nav-link active"  to="/post"> Créer un Post</router-link>
+              <router-link class="nav-link active"  to="/postCreate"> Créer un Post</router-link>
             </li>
             <li class="nav-item">
               <a @click="logoutClick" class="nav-link active" aria-current="/logout" href="/login"

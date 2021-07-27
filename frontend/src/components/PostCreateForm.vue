@@ -1,6 +1,7 @@
+<!--formulaire création post-->
 <template>
   <form @submit.prevent="submitPost">
-    <h3>Post</h3>
+    <h3>Créer un post</h3>
 
     <div class="form-group">
       <label>Title</label>
@@ -35,7 +36,7 @@ import axios from "axios";
 
 
 export default {
-  name: "Post",
+  name: "PostCreateForm",
 
   data() {
     return {
