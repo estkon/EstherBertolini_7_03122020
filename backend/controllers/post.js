@@ -39,6 +39,15 @@ exports.getAllPosts = (req, res, next) => {
       });
   };
 
+  exports.getOnePost = (req, res, next) => {
+    Post.findOne ({where:{id: req.params.id, include:[User]}}) //récupération de l'id et des infos user
+      .then(post => res.status(200).json(post))
+      .catch(error => {
+          console.log(error);
+          res.status(500).json("error getOnePost")
+      });
+  };
+
 exports.deletePost = async (req, res, next) => {
     let postId = req.params.id
         const post = await Post.findOne({ where: { id: postId }})
