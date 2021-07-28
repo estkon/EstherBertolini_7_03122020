@@ -16,7 +16,7 @@
                 <Like/>
             </div>
           </div>
-              <form @submit="sendCommenter" v-if="ajouterCom"> 
+              <form @submit="sendCommenter"> 
               <textarea rows=3 class="form-control" placeholder="Votre commentaire ici" v-model="commentaire" ></textarea>
               <button type="submit" class="btn btn-primary btn-block">Poster</button>
               </form>
@@ -46,10 +46,7 @@ export default {
      }
   },
   methods:{
-     ajouterCom() { 
-       // si showCommentForm vaut false elle sera true et affiche la form sinon elle devient false et cache la form
-          this.showCommentForm = !this.showCommentForm
-    } ,
+
     supprimerPost(){
       let postId = this.post.id
       axios.delete("http://localhost:8000/api/post/" + postId)
@@ -59,6 +56,7 @@ export default {
       .catch(err => console.log(err))
     }
   },
+  
     
   computed:{
     ...mapGetters(['user'])

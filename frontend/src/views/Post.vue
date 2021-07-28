@@ -19,7 +19,11 @@ import axios from "axios"
 
 export default {
     name:'Post',
+      components:{
 
+      PostCard,
+      
+    },
 
     //changer l'id du post en fonction de celui sur lequel on clique sans rechargement de page
   watch: {
