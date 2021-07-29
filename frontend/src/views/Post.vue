@@ -5,9 +5,10 @@
             <div v-for = "post in posts" :key= "post.id"> <!--Dans les post chercher le post avec cet id-->
                 <PostCard :post="post"/> 
             </div>
-            <form class="comment">
-
-            </form>
+            <form @submit="sendCommenter" v-if="ajouterCom"> 
+              <textarea rows=3 class="form-control" placeholder="Votre commentaire ici" v-model="commentaire" ></textarea>
+              <button type="submit" class="btn btn-primary btn-block">Poster</button>
+           </form>
 </div>
 
 
@@ -15,6 +16,7 @@
 
 <script>
 import axios from "axios"
+import PostCard from "../components/PostCard.vue"
 
 
 export default {
