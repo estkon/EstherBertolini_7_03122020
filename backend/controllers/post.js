@@ -7,7 +7,7 @@ const path = require('path')
 let Post = require("../models").Post
 let User = require("../models").User
 let Commentary = require("../models").Commentary
-let Likes = require("../models").Likes
+let Like = require("../models").Like
 
 exports.createPost = (req, res, next) =>{
     req.body.post = JSON.parse(req.body.post);
@@ -37,7 +37,28 @@ exports.getAllPosts = (req, res, next) => {
           console.log(error);
           res.status(500).json("error getAllPosts")
       });
+      
   };
+  exports.likePost = async (req, res, next) => {
+    console.log(req.body)
+    let { UserId, PostId, like } = req.body // recupérer dans le body
+    Post.findOne({ where: { id: PostId } }) // chercher le post avec cet id
+        .then(post => {
+            post.update({lastUpdate: new Date()}) // mettre à jour le post avec la date
+        })
+
+    if (like == 0) { // si like
+        const _like = await Likes.create({ UserId, PostId, like }) // créer un like avec userId, PostID
+        if (_like) res.status(201).json("like ajouté")
+        else res.status(200).json({ err: "impossible de créer le like" })
+    } else {// Supprimer like
+        const _like = await Likes.findOne({ where: { [Op.and]: [{ UserId, PostId }] } })// chercher le like avec ce postID et UserId
+        const response = _like.destroy() // le supprimé
+        if (response) res.status(201).json("like supprimé ")
+        else res.status(200).json({ err: "impossible de supprimer le like" })
+    }
+},
+    
 
 exports.deletePost = async (req, res, next) => {
     let postId = req.params.id
@@ -51,5 +72,4 @@ exports.deletePost = async (req, res, next) => {
         await post.destroy()
             .then(() => res.status(200).json("post supprimé"))
             .catch(err => res.status(500).json("le post n'as pas pu étre supprimé !", err))
-}
-  
+    }

@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       models.Post.belongsTo(models.User, {
         foreignKey: "UserId"
       })// le modèle Post peut avoir plusieur user
-      models.Post.hasMany(models.Like,{ onDelete: 'cascade' }) // le modèle Post peut avoir plusieur like
-      models.Post.hasMany(models.Commentary, { onDelete: 'cascade' }) // le modèle Post peut avoir plusieur like
+      models.Post.hasMany(models.Likes,{ onDelete: 'cascade' }) // le modèle Post peut avoir plusieur like
+      models.Post.hasMany(models.Commentary, { onDelete: 'cascade' }) // le modèle Post peut avoir plusieur commentaires
     }
   };
   Post.init({

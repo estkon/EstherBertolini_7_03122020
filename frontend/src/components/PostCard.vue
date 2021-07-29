@@ -16,9 +16,9 @@
                 <Like/>
             </div>
           </div>
-              <form @submit="sendCommenter"> 
+              <form @submit="sendCommenter(post.id)"> 
               <textarea rows=3 class="form-control" placeholder="Votre commentaire ici" v-model="commentaire" ></textarea>
-              <button type="submit" class="btn btn-primary btn-block">Poster</button>
+              <button @click="sendCommenter(post.id)" type="submit" class="btn btn-primary btn-block">Poster</button>
               </form>
           </div>
               
@@ -33,7 +33,8 @@ import Like from '../components/Like.vue'
 export default {
   name: "PostCard",
   props: ["post"],
- components:{
+
+  components:{
 
       Like,
       
@@ -43,10 +44,26 @@ export default {
       image: null,
       showCommentForm: false,
       commentaire:"",
+      youLikedPost: '', // clé pour savoir si le user a liker
      }
   },
-  methods:{
+      //on vérifie s’il a liké, depuis les post.likes on regardes si l’ID du user exist
+     created:{
+      isPostLiked: function () {
+      this.post.Like.forEach(like => { //cherché les like sur ce post
+        if(like.UserId == this.user.id) { // si le like.userId correspond à l'id su user connecté
+          this.youLikedPost = true // le user a liké
+        }
+      })
+      return this.youLikedPost
+    },
+     },
+    computed:{
+    ...mapGetters(['user'])
+  },
 
+    methods:{
+    
     supprimerPost(){
       let postId = this.post.id
       axios.delete("http://localhost:8000/api/post/" + postId)
@@ -54,15 +71,23 @@ export default {
           window.location.href="/"
       })
       .catch(err => console.log(err))
-    }
-  },
-  
-    
-  computed:{
-    ...mapGetters(['user'])
-  }
-};
-  
+    },
+
+
+    likePost: function(){
+              axios.post("http://localhost:8000/like/${this.post.id}", {
+                UserId : this.user.id , PostId : this.post.id , like : this.youLikedPost ? 0 : 1
+              })
+                .then((reponse) => {
+    // récupérer le bon post depuis le backend
+                  this.youLikedPost= reponse.data.filter(post=> post.id == this.post.id);
+                  
+                  this.youLikedPost = !this.youLikedPost
+                })
+            }
+          },     
+}
+
 </script>
 
 <style  scoped>
