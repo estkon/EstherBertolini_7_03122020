@@ -18,6 +18,10 @@
           <!--Utilisé cette nav si user connecté-->
         
           <ul v-if="user" class="navbar-nav ml-auto mb-2 mb-lg-0" >
+                        <li class="nav-item">
+              <router-link  class="nav-link" to="/liste-utilisateurs"
+                >Liste des membres</router-link>
+            </li>
             <li class="nav-item">
               <router-link  class="nav-link" to="/profil"
                 >{{user.firstname}} {{user.lastname}}</router-link>

@@ -24,6 +24,10 @@ module.exports = {
         allowNull: false
 
       },
+      userName:{
+        type:Sequelize.SRING,
+        allowNull: false
+      },
       PostId:{
         type: Sequelize.INTEGER,
         allowNull: false

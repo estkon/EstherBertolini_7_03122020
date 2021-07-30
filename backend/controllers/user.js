@@ -14,6 +14,12 @@ exports.getAllUsers = (req, res, next) => {
     
 };
 
+exports.getOneUser = (req, res, next) => {
+  User.findOne({ _id: req.params.id })
+    .then(user => res.status(200).json(user))
+    .catch(error => res.status(404).json({ error }));
+};
+
 exports.signup = (req, res, next) => {
 
   //Cryptage de l'email
@@ -77,10 +83,11 @@ exports.login = async (req, res, next) => {
     }
 };
 
+
 exports.deleteUser = async (req, res, next) => {
   let userId = req.params.id
   const user = await User.findOne({ where: { id: userId }})
-      await user.destroy()
+       user.destroy()
           .then(() => res.status(200).json("compte supprimé"))
           .catch(err => res.status(500).json("le compte n'as pas pu étre supprimé !", err))
   }

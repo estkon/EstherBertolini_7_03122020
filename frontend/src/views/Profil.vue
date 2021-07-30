@@ -36,7 +36,7 @@
     <div class="btn-group">
       <button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
       <!-- <div v-if="User.isAdmin || User.id == user.id">  -->
-        <button type="button" class="btn btn-primary btn-block" @click="supprimerUser(user.id)"> Supprimer le compte</button>
+        <button type="button" class="btn btn-primary btn-block" @click="deleteUser(user.id)"> Supprimer le compte</button>
       <!-- </div> -->
     </div>
   </form>
@@ -61,19 +61,15 @@ export default {
     };
   },
   methods: {
-    supprimerUser() {
-      let userId = this.user.id;
-         axios
-          .delete("localhost:8000/api/user/profil/"+ userId) 
-         .then(() => {
-          window.location.href = "/signup";
-        })
-          .catch(() => {
-            this.error = "Compte non supprimé!";
-          });
-
-      } 
-}}
+      deleteUser(userId){
+          axios.delete("http://localhost:8000/api/user/" + userId)
+          .then(()=>{
+            sessionStorage.clear()
+              window.location.href='/signup'
+          })
+          .catch((error) => console.log(error)); 
+      }
+  }}
 </script>
 
 <style scoped>

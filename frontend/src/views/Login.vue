@@ -56,7 +56,7 @@ export default {
           sessionStorage.setItem("token", response.data.token);
           sessionStorage.setItem("user", JSON.stringify(response.data.user));
           this.$store.dispatch("user", response.data.user);
-          this.$router.push("/");
+          window.location.href="/";
         })
         .catch((e) => {
           this.error = "Invalid username/password!" + e;

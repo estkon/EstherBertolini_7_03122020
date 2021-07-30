@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
 import Profil from './views/Profil.vue'
+import UsersList from './views/UsersList.vue'
 import PostCreateForm from './components/PostCreateForm.vue'
 import  store  from './vuex'
 import VueRouter from 'vue-router'
@@ -22,6 +23,7 @@ const routes = [
     { path: '/signup', name:"Signup", component: Signup },
     { path: '/profil', name:"Profil", component: Profil, meta: { requiresLogin: true } },
     { path: '/postCreate', name:"PostCreate" ,component: PostCreateForm, meta: { requiresLogin: true } },
+    { path: '/liste-utilisateurs', name:"UsersList" ,component: UsersList, meta: { requiresLogin: true } },
     
     
 ]
