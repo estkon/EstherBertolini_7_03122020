@@ -48,7 +48,7 @@ import {mapGetters} from 'vuex'
 import axios from 'axios'
 
 export default {
-  name: "Profil",
+  name: "ProfilForm",
   computed: {
     ...mapGetters(["user"]),
   },
@@ -63,13 +63,16 @@ export default {
   methods: {
     supprimerUser() {
       let userId = this.user.id;
-      axios
-        .delete("http://localhost:8000/api/user/"+ userId )
-        .then(response => {
-          console.log(response)
+         axios
+          .delete("localhost:8000/api/user/profil/"+ userId) 
+         .then(() => {
+          window.location.href = "/signup";
         })
-        .catch((err) => console.log(err));
-    },
+          .catch(() => {
+            this.error = "Compte non supprimé!";
+          });
+
+      } 
 }}
 </script>
 

@@ -1,4 +1,6 @@
 //protége les routes sélectionnées et vérifie que l'utilisateur est authentifié avant d'autoriser l'envoi de ses requêtes
+'use strict'
+
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {

@@ -31,11 +31,12 @@ exports.createPost = (req, res, next) =>{
 
 }
 exports.getAllPosts = (req, res, next) => {
-    Post.findAll({include:[User]})
+    Post.findAll({include:[User], order:[['updatedAt', 'DESC']] })
       .then(posts => res.status(200).json(posts))
       .catch(error => {
           console.log(error);
           res.status(500).json("error getAllPosts")
+          
       });
       
   };

@@ -114,12 +114,12 @@ export default {
       "commentaire",
       JSON.stringify({
         commentaire: this.commentaire,
-        userId: JSON.parse(localStorage.getItem("user")).id,
+        userId: JSON.parse(sessionStorage.getItem("user")).id,
       })
     );
     axios
       .post("http://localhost:8000/api/post", formData, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       })
       .then(() => {
         this.$router.push("/");

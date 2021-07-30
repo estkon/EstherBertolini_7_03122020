@@ -4,6 +4,16 @@ const CryptoJS = require('crypto-js');
 
 const User = require('../models').User; //récupérer le modèle User
 
+exports.getAllUsers = (req, res, next) => {
+  User.findAll()
+    .then(user => res.status(200).json(user))
+    .catch(error => {
+        console.log(error);
+        res.status(500).json("error getAllUsers")
+    });
+    
+};
+
 exports.signup = (req, res, next) => {
 
   //Cryptage de l'email
@@ -68,6 +78,8 @@ exports.login = async (req, res, next) => {
 };
 
 exports.deleteUser = async (req, res, next) => {
+  let userId = req.params.id
+  const user = await User.findOne({ where: { id: userId }})
       await user.destroy()
           .then(() => res.status(200).json("compte supprimé"))
           .catch(err => res.status(500).json("le compte n'as pas pu étre supprimé !", err))
