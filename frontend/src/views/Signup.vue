@@ -5,22 +5,22 @@
     <h3>Inscription</h3>
 
     <div class="form-group">
-      <label>FirstName</label>
+      <label>Prénom</label>
       <input
         type="text"
         class="form-control"
         v-model="first_name"
-        placeholder="FirstName"
+        placeholder="Prénom"
       />
     </div>
 
     <div class="form-group">
-      <label>LastName</label>
+      <label>Nom</label>
       <input
         type="text"
         class="form-control"
         v-model="last_name"
-        placeholder="LastName"
+        placeholder="Nom"
       />
     </div>
     <div class="form-group">
@@ -39,11 +39,11 @@
         type="password"
         class="form-control"
         v-model="password"
-        placeholder="Password"
+        placeholder="Mot de passe"
       />
     </div>
 
-    <button type="Envoyer" class="btn btn btn-block">SignUp</button>
+    <button type="submit" class="btn btn btn-block">Inscription</button>
   </form>
 </template>
 

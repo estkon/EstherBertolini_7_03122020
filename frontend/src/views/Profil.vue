@@ -1,29 +1,28 @@
 <!--page profil user-->
 <template>
-      <form>
+      <form @submit.prevent="handleSubmit">>
     
     <h3>Votre Compte</h3>
 
-    <div class="form-group">
+     <div class="form-group">
       <label>Prénom</label>
       <input
-        type="name"
+        type="text"
         class="form-control"
-        v-model="firstname"
-        placeholder="Name"
-        />
+        v-model="first_name"
+        placeholder="Prénom"
+      />
     </div>
 
-        <div class="form-group">
+    <div class="form-group">
       <label>Nom</label>
       <input
-        type="name"
+        type="text"
         class="form-control"
-        v-model="lastname"
-        placeholder="Name"
-        />
+        v-model="last_name"
+        placeholder="Nom"
+      />
     </div>
-
     <div class="form-group">
       <label>Email</label>
       <input
@@ -31,16 +30,6 @@
         class="form-control"
         v-model="email"
         placeholder="Email"
-      />
-    </div>
-
-    <div class="form-group">
-      <label>Password</label>
-      <input
-        type="Password"
-        class="form-control"
-        v-model="password"
-        placeholder="Password"
       />
     </div>
 

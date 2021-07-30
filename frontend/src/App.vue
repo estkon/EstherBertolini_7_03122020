@@ -17,8 +17,8 @@ export default {
     Nav,
   },
   created() {
-    if(localStorage.getItem('user') != undefined){
-      this.$store.dispatch('user', JSON.parse(localStorage.getItem('user')))
+    if(sessionStorage.getItem('user') != undefined){
+      this.$store.dispatch('user', JSON.parse(sessionStorage.getItem('user')))
       this.$router.push("/");
     }
   },

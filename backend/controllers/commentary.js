@@ -8,7 +8,7 @@ let Post = require("../models").Post
 let User = require("../models").User
 let Commentary = require("../models").Commentary
 let Likes = require("../models").Likes;
-const commentary = require('../models/commentary');
+
 
 exports.createComment = (req, res, next) =>{
     Commentary.create({
@@ -25,11 +25,11 @@ exports.createComment = (req, res, next) =>{
 
 }
 exports.getAllComments = (req, res, next) => {
-    Post.findAll({include:[User]})
-      .then(posts => res.status(200).json(posts))
+    Commentary.findAll({include:[User]})
+      .then(commentaries => res.status(200).json(commentaries))
       .catch(error => {
           console.log(error);
-          res.status(500).json("error getAllPosts")
+          res.status(500).json("error getAllComentaries")
       });
   };
 
@@ -41,5 +41,3 @@ exports.deleteComment = async (req, res, next) => {
         await comment.destroy()
             .then(() => res.status(200).json("commentaire supprimé"))
             .catch(err => res.status(500).json("le commentaire n'a pas pu étre supprimé !", err))
-}
-  

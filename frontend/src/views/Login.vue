@@ -53,8 +53,8 @@ export default {
         })
         .then((response) => {
           //envoi du token
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("user", JSON.stringify(response.data.user));
+          sessionStorage.setItem("token", response.data.token);
+          sessionStorage.setItem("user", JSON.stringify(response.data.user));
           this.$store.dispatch("user", response.data.user);
           this.$router.push("/");
         })

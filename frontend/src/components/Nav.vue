@@ -69,7 +69,7 @@ export default {
     methods: {
         logoutClick(){
             // déconnexion donc suppression du token
-            localStorage.clear();
+            sessionStorage.clear();
             //gestion du logout changement de la nav
             this.$store.dispatch('user', null);
             //retour à la page principale
