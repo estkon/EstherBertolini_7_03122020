@@ -33,11 +33,8 @@
 
 <script>
 import axios from "axios";
-
-
 export default {
   name: "PostCreateForm",
-
   data() {
     return {
       title: "",
@@ -51,16 +48,14 @@ export default {
       let formData = new FormData();
       formData.append(
         "post",
-        JSON.stringify({ title: this.title, post: this.post, userId: JSON.parse(localStorage.getItem("user")).id })
+        JSON.stringify({ title: this.title, post: this.post, userId: JSON.parse(sessionStorage.getItem("user")).id })
       );
       formData.append("image", this.image);
       axios.post("http://localhost:8000/api/post", formData, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
       }) .then(()=> {
       this.$router.push("/")
     }).catch(err => console.log(err))
-
-
     },
     setImageFile: function (event) {
       this.image = event.target.files[0];

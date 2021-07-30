@@ -66,3 +66,9 @@ exports.login = async (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
     }
 };
+
+exports.deleteUser = async (req, res, next) => {
+      await user.destroy()
+          .then(() => res.status(200).json("compte supprimé"))
+          .catch(err => res.status(500).json("le compte n'as pas pu étre supprimé !", err))
+  }

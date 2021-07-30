@@ -1,16 +1,16 @@
 <!--page profil user-->
 <template>
-      <form @submit.prevent="handleSubmit">>
-    
+  <form @submit.prevent="modifyUserSubmit">
+
     <h3>Votre Compte</h3>
 
-     <div class="form-group">
+    <div class="form-group">
       <label>Prénom</label>
       <input
         type="text"
         class="form-control"
-        v-model="first_name"
-        placeholder="Prénom"
+        v-model="user.firstname"
+        placeholder="Prenom"
       />
     </div>
 
@@ -19,62 +19,74 @@
       <input
         type="text"
         class="form-control"
-        v-model="last_name"
+        v-model="user.lastname"
         placeholder="Nom"
       />
     </div>
     <div class="form-group">
-      <label>Email</label>
+      <label>Mot de passe</label>
       <input
-        type="email"
+        type="password"
         class="form-control"
-        v-model="email"
-        placeholder="Email"
+        v-model="user.password"
+        placeholder="Mot de passe"
       />
     </div>
 
     <div class="btn-group">
-        <button class="btn btn-primary btn-block">Enregistrer</button>
-        <button class="btn btn-primary btn-block">Supprimer le compte</button>
+      <button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
+      <!-- <div v-if="User.isAdmin || User.id == user.id">  -->
+        <button type="button" class="btn btn-primary btn-block" @click="supprimerUser(user.id)"> Supprimer le compte</button>
+      <!-- </div> -->
     </div>
   </form>
 </template>
 
 <script>
 
+import {mapGetters} from 'vuex'
+import axios from 'axios'
 
 export default {
   name: "Profil",
-
+  computed: {
+    ...mapGetters(["user"]),
+  },
   data() {
     return {
-      name: "",
-      firstname:"",
-      lastname:"",
-      email: "",
+      firstname: "",
+      lastname: "",
       password: "",
       error: "",
     };
   },
-}
+  methods: {
+    supprimerUser() {
+      let userId = this.user.id;
+      axios
+        .delete("http://localhost:8000/api/user/"+ userId )
+        .then(response => {
+          console.log(response)
+        })
+        .catch((err) => console.log(err));
+    },
+}}
 </script>
 
 <style scoped>
-button{
-   max-width: 45%;
-   
+button {
+  max-width: 45%;
 }
-.btn-group{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1em;
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
 }
 
 .btn {
   background-color: #f05454;
-  color:white;
+  color: white;
 }
-
 </style>
 
 
