@@ -1,13 +1,14 @@
 <template>
   <div class="userList">
     <div v-if="users">
-      <div v-for="user in users" :key="user.id">
+      <div v-for="_user in users" :key="_user.id">
         <div class="card" style="width: 18rem">
           <div class="card-body">
-            <h5 class="card-title">{{user.firstname}} {{user.lastname}}</h5>
+            <h5 class="card-title">{{_user.firstname}} {{_user.lastname}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            
-            <button v-if="user.isAdmin" @click="deleteUser(user.id)" class="btn btn-danger">Supprimer</button>
+            <div v-if="user.isAdmin">
+            <button @click="deleteUser(_user.id)" class="btn btn-danger">Supprimer</button>
+            </div>
           </div>
         </div>
       </div>
@@ -18,14 +19,11 @@
 <script>
 import axios from "axios";
 import { mapGetters } from "vuex";
-
 export default {
   name: "UserList",
-
   computed: {
     ...mapGetters(["user"]),
   },
-
   data() {
     return {
       users: null,

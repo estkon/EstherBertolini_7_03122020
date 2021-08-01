@@ -93,7 +93,7 @@ export default {
 
     likePost: function () {
       axios
-        .post("http://localhost:8000/like/${this.post.id}", {
+        .post("http://localhost:8000/like/"+ this.post.id , {
           UserId: this.user.id,
           PostId: this.post.id,
           like: this.youLikedPost ? 0 : 1,

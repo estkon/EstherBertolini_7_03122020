@@ -35,9 +35,9 @@
 
     <div class="btn-group">
       <button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
-      <!-- <div v-if="User.isAdmin || User.id == user.id">  -->
+      
         <button type="button" class="btn btn-primary btn-block" @click="deleteUser(user.id)"> Supprimer le compte</button>
-      <!-- </div> -->
+     
     </div>
   </form>
 </template>
