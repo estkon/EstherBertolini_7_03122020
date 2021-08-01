@@ -19,11 +19,12 @@ VueRouter.prototype.push = function push(location) {
 
 const routes = [
     { path: '/',name:"Home", component: Home, meta: { requiresLogin: true } },
-    { path: '/login', name:"Login", component: Login },
-    { path: '/signup', name:"Signup", component: Signup },
+    { path: '/connexion', name:"Login", component: Login },
+    { path: '/inscription', name:"Signup", component: Signup },
     { path: '/profil', name:"Profil", component: Profil, meta: { requiresLogin: true } },
-    { path: '/postCreate', name:"PostCreate" ,component: PostCreateForm, meta: { requiresLogin: true } },
+    { path: '/creer-post', name:"PostCreate" ,component: PostCreateForm, meta: { requiresLogin: true } },
     { path: '/liste-utilisateurs', name:"UsersList" ,component: UsersList, meta: { requiresLogin: true } },
+    { path: '/post', name:"UsersList" ,component: UsersList, meta: { requiresLogin: true } },
     
     
 ]

@@ -76,7 +76,7 @@ export default {
         this.password !=""
       ) {
          axios
-          .post("http://localhost:8000/api/user/signup", {
+          .post("http://localhost:8000/api/user/inscription", {
             firstname: this.first_name,
             lastname: this.last_name,
             email: this.email,
@@ -84,7 +84,7 @@ export default {
           })
           .then(() => {
             //renvoyer l'utilisateur vers le login
-            this.$router.push("/login");
+            this.$router.push("/connexion");
           })
 
           .catch(() => {

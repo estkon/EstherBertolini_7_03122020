@@ -1,5 +1,5 @@
 <template>
-  <div v-if="post" class="card text-dark bg-light mb-3">
+  <router-link :to=" '/post/' + post.id " v-if="post" class="card text-dark bg-light mb-3">
     <div class="card-header">
       <p v-if="post.User">
         {{ post.User.firstname }} {{ post.User.lastname }}
@@ -24,13 +24,14 @@
           <Like />
         </div>
       </div>
-      <form @submit="sendCommenter(post.id)">
+      <!-- <form @submit="sendCommenter(post.id)">
         <textarea
           rows="3"
           class="form-control"
           placeholder="Votre commentaire ici"
           v-model="commentaire"
         ></textarea>
+
         <button
           @click="sendCommenter(post.id)"
           type="submit"
@@ -38,9 +39,9 @@
         >
           Poster
         </button>
-      </form>
+      </form> -->
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -93,7 +94,7 @@ export default {
 
     likePost: function () {
       axios
-        .post("http://localhost:8000/like/"+ this.post.id , {
+        .post("http://localhost:8000/like/" + this.post.id, {
           UserId: this.user.id,
           PostId: this.post.id,
           like: this.youLikedPost ? 0 : 1,
@@ -157,5 +158,8 @@ img {
   height: 40%;
   border: 1px solid #f05454;
   margin: auto;
+}
+a{
+  text-decoration: none;
 }
 </style>

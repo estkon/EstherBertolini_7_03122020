@@ -20,7 +20,7 @@ import PostCard from "../components/PostCard.vue"
 
 
 export default {
-    name:'Post',
+    name:'PostForm',
       components:{
 
       PostCard,

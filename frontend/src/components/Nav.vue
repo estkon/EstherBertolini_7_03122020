@@ -27,10 +27,10 @@
                 >{{user.firstname}} {{user.lastname}}</router-link>
             </li>
             <li class="nav-item ">
-              <router-link class="nav-link active"  to="/postCreate"> Créer un Post</router-link>
+              <router-link class="nav-link active"  to="/creer-post"> Créer un Post</router-link>
             </li>
             <li class="nav-item">
-              <a @click="logoutClick" class="nav-link active" aria-current="/logout" href="/login"
+              <a @click="logoutClick" class="nav-link active" aria-current="/logout" href="/connexion"
                 >Déconnexion</a
               >
             </li>
@@ -41,12 +41,12 @@
         
           <ul v-if="!user" class="navbar-nav me-auto mb-2 mb-lg-0" >
             <li class="nav-item">
-              <router-link class="nav-link active"  to="/login"
+              <router-link class="nav-link active"  to="/connexion"
                 >Connexion</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link active"  to="/signup"
+              <router-link class="nav-link active"  to="/inscription"
                 >Inscription</router-link
               >
             </li>

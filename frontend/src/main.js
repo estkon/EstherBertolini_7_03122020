@@ -12,7 +12,7 @@ moment.locale('fr')
 
 Vue.filter('formatDate', function(value) {
   if (value) {
-    return moment(String(value)).format('d  MMMM Y HH:mm')
+    return moment(String(value)).format(("DD MMM  YYYY"))
   }
 })
 
