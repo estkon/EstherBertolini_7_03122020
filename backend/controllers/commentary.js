@@ -7,7 +7,7 @@ const path = require('path')
 let Post = require("../models").Post
 let User = require("../models").User
 let Commentary = require("../models").Commentary
-let Likes = require("../models").Likes;
+
 
 
 exports.createComment = async (req, res, next) =>{

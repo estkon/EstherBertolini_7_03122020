@@ -6,7 +6,7 @@
           <div class="card-body">
             <h5 class="card-title">{{_user.firstname}} {{_user.lastname}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <div v-if="user.isAdmin && _user.id != user.id">
+            <div v-if="user.isAdmin && _user.id != user.id">rwcd cfxfd 
             <button @click="deleteUser(_user.id)" class="btn btn-danger">Supprimer</button>
             </div>
           </div>

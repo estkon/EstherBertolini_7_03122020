@@ -4,10 +4,9 @@
             <div>
                 <PostCard :post="post"/>
             </div>
-
+            
              <div class="commentList">
-
-                 <div  v-if= "comments">
+                 <div v-if="comments">
                     <div v-for = "comment in comments" :key= "comment.id">
                         <CommentCard :comment="comment"/>
                     </div>
@@ -32,27 +31,35 @@ components:{
       PostCard,
       CommentCard
       
-    },
+    }, 
     computed: {
-        ...mapGetters(["post"])
+        ...mapGetters(['user'])
     },
-     
+
      data(){
          return {
              post: null,
-             comments: null
+             comments:  []
+
          }
      },
     
      created(){
      //changer l'id du post en fonction de celui sur lequel on clique sans rechargement de page 
       let id = this.$route.params.id;
-      //récupération du post
+      //récupération du post avec l'id correspondant
       axios.get("http://localhost:8000/api/post/"+ id)
                .then( response => {
-                   this.post =  response.data })
-    },
+                   this.post =  response.data 
+                   this.comments =  this.post.Commentaries
+                   console.log("this.comments")
+                   console.log(this.comments)
+                   
+                   
+                  
+    })
+     }}
+    
 
-};
 
 </script>

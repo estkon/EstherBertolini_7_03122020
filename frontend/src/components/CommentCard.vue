@@ -2,25 +2,50 @@
 <div class="comment">
     <div class="card ">
   <div class="card-header">
-    {{ comment.User.firstname }} {{comment.User.lastname }}
-        {{ comment.createdAt | formatDate }}
+        <p>
+        {{comment.userName}}  {{ comment.createdAt | formatDate }}
+        </p>
   </div>
   <div class="card-body">
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <div v-if="comment.User.isAdmin || comment.User.id == user.id">
-        <button class="btn btn-sm btn-danger" @click="supprimerCom">
-          <span class="fa fa-trash"></span>Supprimer
-        </button>
+    <p class="card-text">{{ comment.content}}</p>
+          <div v-if="user.isAdmin || comment.UserId == user.id">
+            <button class="btn btn-sm btn-danger" @click="supprimerCom">
+              <span class="fa fa-trash"></span>Supprimer
+            </button>
       </div>
   </div>
   </div>
 </div>
 </template>
+
 <script>
+import axios from "axios";
+import {mapGetters} from 'vuex'
+
 export default {
   name: "CommentCard",
   props: ["comment"],
+  computed: {
+      ...mapGetters(['user'])
+    },
 
+    methods: {
+    supprimerCom() {
+      let commentId = this.comment.id;
+      axios
+        .delete("http://localhost:8000/api/commentary/" + commentId)
+        .then(() => {
+          window.location.href = "/post/:id";
+        })
+        .catch((err) => console.log(err));
+    },
 
-};
+}
+
+}
 </script>
+<style scoped>
+.comment{
+  margin-bottom: 2em;
+}
+</style>

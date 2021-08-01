@@ -59,24 +59,22 @@ export default {
   data() {
     return {
       image: null,
-      // showCommentForm: false,
-      commentaire: "",
       youLikedPost: "", // clé pour savoir si le user a liker
     };
   },
   //on vérifie s’il a liké, depuis les post.likes on regardes si l’ID du user exist
-  created: {
-    isPostLiked: function () {
-      this.post.Like.forEach((like) => {
-        //cherché les like sur ce post
-        if (like.UserId == this.user.id) {
-          // si le like.userId correspond à l'id su user connecté
-          this.youLikedPost = true; // le user a liké
-        }
-      });
-      return this.youLikedPost;
-    },
-  },
+  // created: {
+  //   isPostLiked: function () {
+  //     this.post.Like.forEach((like) => {
+  //       //cherché les like sur ce post
+  //       if (like.UserId == this.user.id) {
+  //         // si le like.userId correspond à l'id su user connecté
+  //         this.youLikedPost = true; // le user a liké
+  //       }
+  //     });
+  //     return this.youLikedPost;
+  //   },
+  // },
   computed: {
     ...mapGetters(["user"]),
   },
@@ -92,42 +90,42 @@ export default {
         .catch((err) => console.log(err));
     },
 
-    likePost: function () {
-      axios
-        .post("http://localhost:8000/like/" + this.post.id, {
-          UserId: this.user.id,
-          PostId: this.post.id,
-          like: this.youLikedPost ? 0 : 1,
-        })
-        .then((reponse) => {
-          // récupérer le bon post depuis le backend
-          this.youLikedPost = reponse.data.filter(
-            (post) => post.id == this.post.id
-          );
+  //   likePost: function () {
+  //     axios
+  //       .post("http://localhost:8000/like/" + this.post.id, {
+  //         UserId: this.user.id,
+  //         PostId: this.post.id,
+  //         like: this.youLikedPost ? 0 : 1,
+  //       })
+  //       .then((reponse) => {
+  //         // récupérer le bon post depuis le backend
+  //         this.youLikedPost = reponse.data.filter(
+  //           (post) => post.id == this.post.id
+  //         );
 
-          this.youLikedPost = !this.youLikedPost;
-        });
-    },
-  },
-  sendCommenter() {
-    let formData = new FormData();
-    formData.append(
-      "commentaire",
-      JSON.stringify({
-        commentaire: this.commentaire,
-        userId: JSON.parse(sessionStorage.getItem("user")).id,
-      })
-    );
-    axios
-      .post("http://localhost:8000/api/post", formData, {
-        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
-      })
-      .then(() => {
-        this.$router.push("/");
-      })
-      .catch((err) => console.log(err));
-  },
-};
+  //         this.youLikedPost = !this.youLikedPost;
+  //       });
+  //   },
+  // },
+  // sendCommenter() {
+  //   let formData = new FormData();
+  //   formData.append(
+  //     "commentaire",
+  //     JSON.stringify({
+  //       commentaire: this.commentaire,
+  //       userId: JSON.parse(sessionStorage.getItem("user")).id,
+  //     })
+  //   );
+  //   axios
+  //     .post("http://localhost:8000/api/post", formData, {
+  //       headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
+  //     })
+  //     .then(() => {
+  //       this.$router.push("/");
+  //     })
+  //     .catch((err) => console.log(err));
+  // },
+}}
 </script>
 
 <style  scoped>
