@@ -59,7 +59,7 @@ export default {
   data() {
     return {
       image: null,
-      showCommentForm: false,
+      // showCommentForm: false,
       commentaire: "",
       youLikedPost: "", // clé pour savoir si le user a liker
     };

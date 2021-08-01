@@ -6,6 +6,7 @@ import Signup from './views/Signup.vue'
 import Profil from './views/Profil.vue'
 import UsersList from './views/UsersList.vue'
 import PostCreateForm from './components/PostCreateForm.vue'
+import Post from './views/Post.vue'
 import  store  from './vuex'
 import VueRouter from 'vue-router'
 
@@ -24,7 +25,7 @@ const routes = [
     { path: '/profil', name:"Profil", component: Profil, meta: { requiresLogin: true } },
     { path: '/creer-post', name:"PostCreate" ,component: PostCreateForm, meta: { requiresLogin: true } },
     { path: '/liste-utilisateurs', name:"UsersList" ,component: UsersList, meta: { requiresLogin: true } },
-    { path: '/post', name:"UsersList" ,component: UsersList, meta: { requiresLogin: true } },
+    { path: '/post/:id', name:"Post" ,component: Post, meta: { requiresLogin: true } },
     
     
 ]

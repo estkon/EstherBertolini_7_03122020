@@ -22,7 +22,7 @@ exports.createPost = (req, res, next) =>{
         UserId: req.body.post.userId
 
     }).then(() =>{
-        res.status(200).json("post created")
+        res.status(200).json("post créé")
     }).catch(err => {
         console.log(err)
         res.status(500).json({ error: "POST_CREATED_ERROR" })
@@ -35,7 +35,17 @@ exports.getAllPosts = (req, res, next) => {
       .then(posts => res.status(200).json(posts))
       .catch(error => {
           console.log(error);
-          res.status(500).json("error getAllPosts")
+          res.status(500).json("impossible de récupérer les posts")
+          
+      });
+      
+  };
+  exports.getOnePost = (req, res, next) => {
+    Post.findOne({include:[User, Commentary], order:[['updatedAt', 'DESC']] })
+      .then(posts => res.status(200).json(posts))
+      .catch(error => {
+          console.log(error);
+          res.status(500).json("impossible de récupérer le post")
           
       });
       
