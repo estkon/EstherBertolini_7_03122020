@@ -34,8 +34,7 @@
     </div>
 
     <div class="btn-group">
-      <button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
-      
+
         <button type="button" class="btn btn-primary btn-block" @click="deleteUser(user.id)"> Supprimer le compte</button>
      
     </div>
@@ -74,7 +73,7 @@ export default {
 
 <style scoped>
 button {
-  max-width: 45%;
+  max-width: 100%;
 }
 .btn-group {
   display: flex;
