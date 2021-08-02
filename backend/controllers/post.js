@@ -7,7 +7,9 @@ const path = require('path')
 let Post = require("../models").Post
 let User = require("../models").User
 let Commentary = require("../models").Commentary
-let Like = require("../models").Like
+let Likes = require("../models").Likes
+const { Op } = require("sequelize");
+
 
 exports.createPost = (req, res, next) =>{
     req.body.post = JSON.parse(req.body.post);
@@ -22,7 +24,7 @@ exports.createPost = (req, res, next) =>{
         UserId: req.body.post.userId
 
     }).then(() =>{
-        res.status(200).json("post créé")
+        res.status(200).json("post created")
     }).catch(err => {
         console.log(err)
         res.status(500).json({ error: "POST_CREATED_ERROR" })
@@ -41,7 +43,7 @@ exports.getAllPosts = (req, res, next) => {
       
   };
   exports.getOnePost = (req, res, next) => {
-    Post.findOne({include:[User, Commentary], order:[['updatedAt', 'DESC']] })
+    Post.findOne({include:[User, Commentary, Likes], order:[['updatedAt', 'DESC'],[{model:Commentary}, 'updatedAt', 'DESC']] })
       .then(posts => res.status(200).json(posts))
       .catch(error => {
           console.log(error);
@@ -53,10 +55,10 @@ exports.getAllPosts = (req, res, next) => {
   exports.likePost = async (req, res, next) => {
     console.log(req.body)
     let { UserId, PostId, like } = req.body // recupérer dans le body
-    Post.findOne({ where: { id: PostId } }) // chercher le post avec cet id
-        .then(post => {
-            post.update({lastUpdate: new Date()}) // mettre à jour le post avec la date
-        })
+    // Post.findOne({ where: { id: PostId } }) // chercher le post avec cet id
+    //     .then(post => {
+    //         post.update({lastUpdate: new Date()}) // mettre à jour le post avec la date
+    //     })
 
     if (like == 0) { // si like
         const _like = await Likes.create({ UserId, PostId, like }) // créer un like avec userId, PostID
@@ -64,7 +66,7 @@ exports.getAllPosts = (req, res, next) => {
         else res.status(200).json({ err: "impossible de créer le like" })
     } else {// Supprimer like
         const _like = await Likes.findOne({ where: { [Op.and]: [{ UserId, PostId }] } })// chercher le like avec ce postID et UserId
-        const response = _like.destroy() // le supprimé
+        const response = _like.destroy() // le supprimés    
         if (response) res.status(201).json("like supprimé ")
         else res.status(200).json({ err: "impossible de supprimer le like" })
     }

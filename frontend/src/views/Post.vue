@@ -2,7 +2,7 @@
   <div class="post">
     <div>
       <PostCard :post="post" />
-      <form @submit="sendCommenter(post.id)">
+      <form @submit.prevent="sendCommenter(post.id)">
         <textarea
           rows="3"
           class="form-control"
@@ -11,7 +11,6 @@
         ></textarea>
 
         <button
-          @click="sendCommenter(post.id)"
           type="submit"
           class="btn btn-primary btn-block"
         >
@@ -34,10 +33,8 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import PostCard from "../components/PostCard.vue";
 import CommentCard from "../components/CommentCard.vue";
-
 export default {
   name: "Post",
-
   components: {
     PostCard,
     CommentCard,
@@ -45,7 +42,6 @@ export default {
   computed: {
     ...mapGetters(["user"]),
   },
-
   data() {
     return {
       commentaire:"",
@@ -53,14 +49,14 @@ export default {
       comments: [],
     };
   },
-
   methods: {
     sendCommenter() {
-     const commentData = JSON.stringify({
+        console.log("commentaire")
+     const commentData ={
      commentaire: this.commentaire,
      UserId: this.user.id,
      PostId: this.post.id
-});
+};
       axios
         .post("http://localhost:8000/api/comment", commentData, {
           headers: {
@@ -68,7 +64,10 @@ export default {
           },
         })
         .then(() => {
-          this.$router.push("/post/:id");
+           axios.get("http://localhost:8000/api/post/" + this.post.id).then((response) => {
+      this.post = response.data;
+      this.comments = this.post.Commentaries;
+    });
         })
         .catch((err) => console.log(err));
     },
@@ -84,3 +83,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+#send-comment {
+    background-color: #30475e;
+    margin-bottom:2em;
+}
+
+</style>

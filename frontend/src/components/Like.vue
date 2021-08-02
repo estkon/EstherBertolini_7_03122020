@@ -20,30 +20,38 @@
 import  Vue from 'vue'
 import  BootstrapVue  from 'bootstrap-vue'
 import  BootstrapVueIcons from 'bootstrap-vue'
+import axios from 'axios'
+import {mapGetters} from 'vuex'
+
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 export default{
     name:'Like',
+    props:["postId"],
   data() {
     return {
-      countLike:"",
-      countDislike:""
+      countLike:0,
+      userLiked: false,
      }
   },
+  computed:{
+        ...mapGetters(['user'])
+  },
     methods:{
-        likePost(){ //au click sur j'aime
-                this.countLike=1 // incrémenté de 1
-                if(this.countDislike >0){
-                    this.countDislike--
-                    }
+        likePost(){ 
+            axios.post("http://localhost:8000/api/post/like", {
+                like: this.userLiked? 0 : 1,
+                UserId: this.user.id,
+                PostId: this.postId
+            },{headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },}).then(
+                ()=>{
+                    this.userLiked = !this.userLiked
+                    this.userLiked ? this.countLike++ : this.countLike--
+                }
+            )
          },
-        dislikePost(){ //au click sur j'aime pas
-        this.countDislike=1 // incrémenté de 1
-        if(this.countLike >0){
-            this.countLike--
-            }
+
         }
-    },
 
 }
 </script>

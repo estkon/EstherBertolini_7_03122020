@@ -1,5 +1,5 @@
 <template>
-  <router-link :to=" '/post/' + post.id " v-if="post" class="card text-dark bg-light mb-3">
+  <div v-if="post" class="card text-dark bg-light mb-3">
     <div class="card-header">
       <p v-if="post.User">
         {{ post.User.firstname }} {{ post.User.lastname }}
@@ -14,34 +14,21 @@
 
       <div class="card-body">
         <h5 class="card-title">{{ post.title }}</h5>
+        <router-link :to=" '/post/' + post.id " >
         <img
           class="card-img"
           :src="'http://localhost:8000' + post.image"
           alt="Card image cap"
         />
+        </router-link>
         <p class="card-text">{{ post.content }}</p>
         <div class="like">
-          <Like />
+          <Like :postId ="post.id"/>
         </div>
       </div>
-      <!-- <form @submit="sendCommenter(post.id)">
-        <textarea
-          rows="3"
-          class="form-control"
-          placeholder="Votre commentaire ici"
-          v-model="commentaire"
-        ></textarea>
-
-        <button
-          @click="sendCommenter(post.id)"
-          type="submit"
-          class="btn btn-primary btn-block"
-        >
-          Poster
-        </button>
-      </form> -->
+     
     </div>
-  </router-link>
+  </div>
 </template>
 
 <script>
@@ -106,24 +93,6 @@ export default {
   //         this.youLikedPost = !this.youLikedPost;
   //       });
   //   },
-  // },
-  // sendCommenter() {
-  //   let formData = new FormData();
-  //   formData.append(
-  //     "commentaire",
-  //     JSON.stringify({
-  //       commentaire: this.commentaire,
-  //       userId: JSON.parse(sessionStorage.getItem("user")).id,
-  //     })
-  //   );
-  //   axios
-  //     .post("http://localhost:8000/api/post", formData, {
-  //       headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
-  //     })
-  //     .then(() => {
-  //       this.$router.push("/");
-  //     })
-  //     .catch((err) => console.log(err));
   // },
 }}
 </script>

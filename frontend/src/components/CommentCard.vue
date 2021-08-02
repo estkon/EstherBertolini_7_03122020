@@ -33,7 +33,7 @@ export default {
     supprimerCom() {
       let commentId = this.comment.id;
       axios
-        .delete("http://localhost:8000/api/commentary/" + commentId)
+        .delete("http://localhost:8000/api/comment/" + commentId)
         .then(() => {
           window.location.href = "/post/:id";
         })
@@ -45,7 +45,12 @@ export default {
 }
 </script>
 <style scoped>
+.card-header{
+
+    background-color: #e8e8e8;
+}
 .comment{
   margin-bottom: 2em;
 }
+
 </style>

@@ -11,9 +11,13 @@ let Commentary = require("../models").Commentary
 
 
 exports.createComment = async (req, res, next) =>{
-    let user = await User.findOne({
-        where:{ id: req.body.UserId}
-    })
+    console.log(req.body)
+     User.findByPk(
+         req.body.UserId
+    ).then(
+        user =>{
+
+
     Commentary.create({
         content: req.body.commentaire,
         UserId: req.body.UserId,
@@ -25,9 +29,23 @@ exports.createComment = async (req, res, next) =>{
         console.log(err)
         res.status(500).json({ error: "POST_CREATED_ERROR" })
     })
-
+}
+).catch(err => {
+    console.log(err)
+    res.status(500).json({ error: "POST_CREATED_ERROR" })
+})
 
 }
+// exports.getAllComments = (req, res, next) => {
+//     Post.findAll({include:[User], order:[['updatedAt', 'DESC']] })
+//       .then(comments => res.status(200).json(comments))
+//       .catch(error => {
+//           console.log(error);
+//           res.status(500).json("impossible de récupérer les commentaires")
+          
+//       });
+// }
+
 exports.findOneComment = (req, res, next) => {
     Commentary.findOne()
       .then(commentaries => res.status(200).json(commentaries))
