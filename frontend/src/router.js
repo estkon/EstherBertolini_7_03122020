@@ -38,7 +38,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresLogin) && !store.state.user) {
         // set Vuex state's globalError, then redirect
-        next("/login")
+        next("/connexion")
     } else {
         next()
     }

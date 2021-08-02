@@ -4,7 +4,7 @@ const fsOrigin = require('fs')
 const fs = require('fs').promises
 const path = require('path')
 
-let Post = require("../models").Post
+
 let User = require("../models").User
 let Commentary = require("../models").Commentary
 
@@ -12,12 +12,12 @@ let Commentary = require("../models").Commentary
 
 exports.createComment = async (req, res, next) =>{
     let user = await User.findOne({
-        where:{ id: req.body.userId}
+        where:{ id: req.body.UserId}
     })
     Commentary.create({
-        content: req.body.commentary,
-        UserId: req.body.userId,
-        PostId: req.body.postId,
+        content: req.body.commentaire,
+        UserId: req.body.UserId,
+        PostId: req.body.PostId,
         userName: user.firstname +" "+ user.lastname
     }).then(() =>{
         res.status(200).json("post created")

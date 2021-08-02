@@ -1,65 +1,86 @@
 <template>
-    <div class="post">
-        
-            <div>
-                <PostCard :post="post"/>
-            </div>
-            
-             <div class="commentList">
-                 <div v-if="comments">
-                    <div v-for = "comment in comments" :key= "comment.id">
-                        <CommentCard :comment="comment"/>
-                    </div>
+  <div class="post">
+    <div>
+      <PostCard :post="post" />
+      <form @submit="sendCommenter(post.id)">
+        <textarea
+          rows="3"
+          class="form-control"
+          placeholder="Votre commentaire ici"
+          v-model="commentaire"
+        ></textarea>
 
-                </div>
-
-            </div>
+        <button
+          @click="sendCommenter(post.id)"
+          type="submit"
+          class="btn btn-primary btn-block"
+        >
+          Poster
+        </button>
+      </form>
     </div>
-        
+
+    <div class="commentList">
+      <div v-if="comments">
+        <div v-for="comment in comments" :key="comment.id">
+          <CommentCard :comment="comment" />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-import axios from "axios"
-import {mapGetters} from 'vuex'
-import PostCard from '../components/PostCard.vue'
-import CommentCard from '../components/CommentCard.vue'
+import axios from "axios";
+import { mapGetters } from "vuex";
+import PostCard from "../components/PostCard.vue";
+import CommentCard from "../components/CommentCard.vue";
 
 export default {
- name: 'Post',
- 
-components:{
+  name: "Post",
 
-      PostCard,
-      CommentCard
-      
-    }, 
-    computed: {
-        ...mapGetters(['user'])
+  components: {
+    PostCard,
+    CommentCard,
+  },
+  computed: {
+    ...mapGetters(["user"]),
+  },
+
+  data() {
+    return {
+      commentaire:"",
+      post: null,
+      comments: [],
+    };
+  },
+
+  methods: {
+    sendCommenter() {
+     const commentData = JSON.stringify({
+     commentaire: this.commentaire,
+     UserId: this.user.id,
+     PostId: this.post.id
+});
+      axios
+        .post("http://localhost:8000/api/comment", commentData, {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        })
+        .then(() => {
+          this.$router.push("/post/:id");
+        })
+        .catch((err) => console.log(err));
     },
-
-     data(){
-         return {
-             post: null,
-             comments:  []
-
-         }
-     },
-    
-     created(){
-     //changer l'id du post en fonction de celui sur lequel on clique sans rechargement de page 
-      let id = this.$route.params.id;
-      //récupération du post avec l'id correspondant
-      axios.get("http://localhost:8000/api/post/"+ id)
-               .then( response => {
-                   this.post =  response.data 
-                   this.comments =  this.post.Commentaries
-                   console.log("this.comments")
-                   console.log(this.comments)
-                   
-                   
-                  
-    })
-     }}
-    
-
-
+  },
+  created() {
+    //changer l'id du post en fonction de celui sur lequel on clique sans rechargement de page
+    let id = this.$route.params.id;
+    //récupération du post avec l'id correspondant
+    axios.get("http://localhost:8000/api/post/" + id).then((response) => {
+      this.post = response.data;
+      this.comments = this.post.Commentaries;
+    });
+  },
+};
 </script>

@@ -47,7 +47,7 @@ export default {
   methods:{
     handleSubmit() {
       axios
-        .post("http://localhost:8000/api/user/login", {
+        .post("http://localhost:8000/api/user/connexion", {
           email: this.email,
           password: this.password,
         })
