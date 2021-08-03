@@ -33,7 +33,7 @@ exports.createPost = (req, res, next) =>{
 
 }
 exports.getAllPosts = (req, res, next) => {
-    Post.findAll({include:[User, Commentary], order:[['updatedAt', 'DESC']] })
+    Post.findAll({include:[User, Commentary, Likes], order:[['updatedAt', 'DESC']] })
       .then(posts => res.status(200).json(posts))
       .catch(error => {
           console.log(error);
@@ -62,11 +62,18 @@ exports.getAllPosts = (req, res, next) => {
         else res.status(200).json({ err: "impossible de créer le like" })
     } else {// Supprimer like
         const _like = await Likes.findOne({ where: { [Op.and]: [{ UserId, PostId }] } })// chercher le like avec ce postID et UserId
-        const response = await _like.destroy() // le supprimé   
-        if (response) res.status(201).json("like supprimé ")
-        else res.status(200).json({ err: "impossible de supprimer le like" })
+        if(_like){
+            _like.destroy().then(()=>res.status(200).json("like supprimé"))
+            .catch(err=> {
+                 console.log(err)
+                 res.status(200).json({ err: "impossible de supprimer le like" })
+            })
+            }
+            else{res.status(200).json('impossible d\'ajouter le like')}
+
+            
     }
-},
+}
     
 
 exports.deletePost = async (req, res, next) => {

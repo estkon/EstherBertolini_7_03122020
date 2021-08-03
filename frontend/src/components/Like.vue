@@ -27,11 +27,11 @@ Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 export default{
     name:'Like',
-    props:["postId","userHasLiked"],
+    props:["postId","userHasLiked", "likeCount"],
   data() {
     return {
-      countLike:0,
-      userLiked: false,
+      countLike: this.likeCount,
+      userLiked: this.userHasLiked,
      }
   },
   computed:{
@@ -40,7 +40,7 @@ export default{
     methods:{
         likePost(){ 
             axios.post("http://localhost:8000/api/post/like", {
-                like: this.userLiked? 0 : 1,
+                like: this.userLiked? 1 : 0,
                 UserId: this.user.id,
                 PostId: this.postId
             },{headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },})

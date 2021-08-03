@@ -9,7 +9,7 @@
   <div class="card-body">
     <p class="card-text">{{ comment.content}}</p>
           <div v-if="user.isAdmin || comment.UserId == user.id">
-            <button class="btn btn-sm btn-danger" @click="supprimerCom">
+            <button class="btn btn-sm btn-danger" @click="supprimerCom($event)">
               <span class="fa fa-trash"></span>Supprimer
             </button>
       </div>
@@ -24,18 +24,19 @@ import {mapGetters} from 'vuex'
 
 export default {
   name: "CommentCard",
-  props: ["comment"],
+  props: ["comment","postId"],
   computed: {
       ...mapGetters(['user'])
     },
 
     methods: {
-    supprimerCom() {
+    supprimerCom(event) {
       let commentId = this.comment.id;
       axios
         .delete("http://localhost:8000/api/comment/" + commentId)
         .then(() => {
-          window.location.href = "/post/:id";
+          event.target.parentNode.parentNode.parentNode.style.display="none"
+
         })
         .catch((err) => console.log(err));
     },

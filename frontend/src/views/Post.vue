@@ -1,8 +1,8 @@
 <template>
   <div class="post">
-    <div>
+    <div v-if="post">
       <PostCard :post="post" />
-      <Like :postId="post.id" :userHasLiked="userLiked"/>
+    
       <form @submit.prevent="sendCommenter(post.id)">
         <textarea
           rows="3"
@@ -23,7 +23,7 @@
     <div class="commentList">
       <div v-if="comments">
         <div v-for="comment in comments" :key="comment.id">
-          <CommentCard :comment="comment" />
+          <CommentCard :comment="comment" :postId="post.id"/>
         </div>
       </div>
     </div>
@@ -34,6 +34,7 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import PostCard from "../components/PostCard.vue";
 import CommentCard from "../components/CommentCard.vue";
+
 export default {
   name: "Post",
   components: {
@@ -70,7 +71,7 @@ export default {
             this.post = response.data;
             this.comments = this.post.Commentaries;
             this.userLiked= this.post.Likes.forEach(like => {
-            if(this.user.id == like.User.id ){
+            if(this.user.id == like.UserId ){
                 this.userLiked = true
 }
 })

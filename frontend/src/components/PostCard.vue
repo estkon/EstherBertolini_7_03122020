@@ -6,7 +6,7 @@
         {{ post.createdAt | formatDate }}
       </p>
 
-      <div v-if="post.User.isAdmin || post.User.id == user.id">
+      <div v-if="user.isAdmin || post.User.id == user.id">
         <button class="btn btn-sm btn-danger" @click="supprimerPost">
           <span class="fa fa-trash"></span>Supprimer
         </button>
@@ -14,19 +14,22 @@
 
       <div class="card-body">
         <h5 class="card-title">{{ post.title }}</h5>
-        <router-link :to=" '/post/' + post.id " >
-        <img
-          class="card-img"
-          :src="'http://localhost:8000' + post.image"
-          alt="Card image cap"
-        />
+        <router-link :to="'/post/' + post.id">
+          <img
+            class="card-img"
+            :src="'http://localhost:8000' + post.image"
+            alt="Card image cap"
+          />
         </router-link>
         <p class="card-text">{{ post.content }}</p>
         <div class="like">
-          <Like :postId ="post.id"/>
+          <Like
+            :likeCount="post.Likes.length"
+            :postId="post.id"
+            :userHasLiked="userLiked"
+          />
         </div>
       </div>
-     
     </div>
   </div>
 </template>
@@ -47,21 +50,10 @@ export default {
     return {
       image: null,
       youLikedPost: "", // clé pour savoir si le user a liker
+      userLiked: false
     };
   },
-  //on vérifie s’il a liké, depuis les post.likes on regardes si l’ID du user exist
-  // created: {
-  //   isPostLiked: function () {
-  //     this.post.Like.forEach((like) => {
-  //       //cherché les like sur ce post
-  //       if (like.UserId == this.user.id) {
-  //         // si le like.userId correspond à l'id su user connecté
-  //         this.youLikedPost = true; // le user a liké
-  //       }
-  //     });
-  //     return this.youLikedPost;
-  //   },
-  // },
+
   computed: {
     ...mapGetters(["user"]),
   },
@@ -77,24 +69,16 @@ export default {
         .catch((err) => console.log(err));
     },
 
-  //   likePost: function () {
-  //     axios
-  //       .post("http://localhost:8000/like/" + this.post.id, {
-  //         UserId: this.user.id,
-  //         PostId: this.post.id,
-  //         like: this.youLikedPost ? 0 : 1,
-  //       })
-  //       .then((reponse) => {
-  //         // récupérer le bon post depuis le backend
-  //         this.youLikedPost = reponse.data.filter(
-  //           (post) => post.id == this.post.id
-  //         );
+  },
+ created() {
+   this.post.Likes.forEach(like => {
+            if(this.user.id == like.UserId ){
+                this.userLiked = true
+}
+ })
+ }
 
-  //         this.youLikedPost = !this.youLikedPost;
-  //       });
-  //   },
-  // },
-}}
+}
 </script>
 
 <style  scoped>
@@ -126,7 +110,7 @@ img {
   border: 1px solid #f05454;
   margin: auto;
 }
-a{
+a {
   text-decoration: none;
 }
 </style>
