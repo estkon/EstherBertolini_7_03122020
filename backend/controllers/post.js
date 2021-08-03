@@ -55,10 +55,6 @@ exports.getAllPosts = (req, res, next) => {
   exports.likePost = async (req, res, next) => {
     console.log(req.body)
     let { UserId, PostId, like } = req.body // recupérer dans le body
-    // Post.findOne({ where: { id: PostId } }) // chercher le post avec cet id
-    //     .then(post => {
-    //         post.update({lastUpdate: new Date()}) // mettre à jour le post avec la date
-    //     })
 
     if (like == 0) { // si like
         const _like = await Likes.create({ UserId, PostId, like }) // créer un like avec userId, PostID
@@ -66,7 +62,7 @@ exports.getAllPosts = (req, res, next) => {
         else res.status(200).json({ err: "impossible de créer le like" })
     } else {// Supprimer like
         const _like = await Likes.findOne({ where: { [Op.and]: [{ UserId, PostId }] } })// chercher le like avec ce postID et UserId
-        const response = _like.destroy() // le supprimés    
+        const response = await _like.destroy() // le supprimé   
         if (response) res.status(201).json("like supprimé ")
         else res.status(200).json({ err: "impossible de supprimer le like" })
     }

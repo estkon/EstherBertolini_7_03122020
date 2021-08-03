@@ -2,6 +2,7 @@
   <div class="post">
     <div>
       <PostCard :post="post" />
+      <Like :postId="post.id" :userHasLiked="userLiked"/>
       <form @submit.prevent="sendCommenter(post.id)">
         <textarea
           rows="3"
@@ -47,6 +48,7 @@ export default {
       commentaire:"",
       post: null,
       comments: [],
+      userLiked : false 
     };
   },
   methods: {
@@ -65,8 +67,14 @@ export default {
         })
         .then(() => {
            axios.get("http://localhost:8000/api/post/" + this.post.id).then((response) => {
-      this.post = response.data;
-      this.comments = this.post.Commentaries;
+            this.post = response.data;
+            this.comments = this.post.Commentaries;
+            this.userLiked= this.post.Likes.forEach(like => {
+            if(this.user.id == like.User.id ){
+                this.userLiked = true
+}
+})
+      
     });
         })
         .catch((err) => console.log(err));
