@@ -105,6 +105,9 @@ export default {
 </script>
 
 <style scoped>
+h3{
+      color: #f05454;
+}
 .btn {
   background-color: #30475e;
   color:white;

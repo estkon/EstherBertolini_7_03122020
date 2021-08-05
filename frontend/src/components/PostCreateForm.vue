@@ -28,7 +28,7 @@
       <img class="imagePreview" :src="url" width="100px" />
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Send</button>
+    <button type="submit" class="btn btn-primary btn-block">Poster</button>
   </form>
 </template>
 
@@ -79,5 +79,11 @@ export default {
 span {
   word-wrap: break-word;
   height: fit-content;
+}
+h3{
+      color: #f05454;
+}
+button{
+background-color: #222831;
 }
 </style>

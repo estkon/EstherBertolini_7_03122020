@@ -73,4 +73,7 @@ export default {
   background-color: #30475e;
   color: white;
 }
+h3{
+      color: #f05454;
+}
 </style>
