@@ -83,7 +83,7 @@ export default {
 <style  scoped>
 .btn-danger {
   color: white;
-  background-color: #ababab;
+  background-color: #800000;
   border: none;
 }
 .btn-primary {
