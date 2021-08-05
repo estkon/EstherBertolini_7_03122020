@@ -13,7 +13,7 @@
       </div>
 
       <div class="card-body">
-        <h5 class="card-title">{{ post.title }}</h5>
+        <h2 class="card-title">{{ post.title }}</h2>
         <router-link :to="'/post/' + post.id">
           <img
             class="card-img"
@@ -50,7 +50,7 @@ export default {
     return {
       image: null,
       youLikedPost: "", // clé pour savoir si le user a liker
-      userLiked: false
+      userLiked: false,
     };
   },
 
@@ -68,23 +68,21 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-
   },
- created() {
-   this.post.Likes.forEach(like => {
-            if(this.user.id == like.UserId ){
-                this.userLiked = true
-}
- })
- }
-
-}
+  created() {
+    this.post.Likes.forEach((like) => {
+      if (this.user.id == like.UserId) {
+        this.userLiked = true;
+      }
+    });
+  },
+};
 </script>
 
 <style  scoped>
 .btn-danger {
   color: white;
-  background-color: #f05454;
+  background-color: #800000;
   border: none;
 }
 .btn-primary {
@@ -98,8 +96,10 @@ export default {
   align-content: space-between;
   text-align: center;
 }
-h5 {
-  color: #f05454;
+h2 {
+      color: #f05454;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
 }
 .card-text {
   color: #30475e;

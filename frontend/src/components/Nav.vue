@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <router-link class="navbar-brand" to="/"><img src="../assets/logo-blanc.png" width="150"></router-link>
+      <router-link aria-current="page" class="navbar-brand" to="/" ><img src="../assets/logo-blanc.png" alt="Groupomania Logo" width="150"><h1>Groupomania
+        </h1>
+      </router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -90,9 +92,12 @@ export default {
 
 <style scoped>
 .navbar{
-    background-color: #f05454;
+    background-color: #222831;
 }
 .navbar-light .navbar-nav .nav-link {
     color: white;
+}
+h1{
+  display:none;
 }
 </style>
