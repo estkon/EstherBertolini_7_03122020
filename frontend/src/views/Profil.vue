@@ -11,6 +11,7 @@
         class="form-control"
         v-model="user.firstname"
         placeholder="Prenom"
+        aria-label="prenom"
       />
     </div>
 
@@ -21,6 +22,7 @@
         class="form-control"
         v-model="user.lastname"
         placeholder="Nom"
+        aria-label="nom"
       />
     </div>
     <div class="form-group">
@@ -30,6 +32,7 @@
         class="form-control"
         v-model="user.password"
         placeholder="Mot de passe"
+        aria-label="mot de passe"
       />
     </div>
 
@@ -82,7 +85,7 @@ button {
 }
 
 .btn {
-  background-color: #f05454;
+  background-color: #800000;
   color: white;
 }
 </style>

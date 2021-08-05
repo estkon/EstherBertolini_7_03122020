@@ -10,17 +10,18 @@
         class="form-control"
         v-model="title"
         placeholder="Title"
+        aria-label="titre"
       />
     </div>
 
     <div class="form-group">
       <label>Image</label>
-      <input type="file" class="form-control" @change="setImageFile" />
+      <input type="file" class="form-control" @change="setImageFile"  aria-label="Image" />
     </div>
 
     <div class="form-group">
       <label>Post</label>
-      <textarea v-model="post" class="form-control" name="post"> </textarea>
+      <textarea v-model="post" class="form-control" name="post"  aria-label="post"> </textarea>
     </div>
 
     <div v-if="url">
@@ -48,14 +49,23 @@ export default {
       let formData = new FormData();
       formData.append(
         "post",
-        JSON.stringify({ title: this.title, post: this.post, userId: JSON.parse(sessionStorage.getItem("user")).id })
+        JSON.stringify({
+          title: this.title,
+          post: this.post,
+          userId: JSON.parse(sessionStorage.getItem("user")).id,
+        })
       );
       formData.append("image", this.image);
-      axios.post("http://localhost:8000/api/post", formData, {
-        headers: { Authorization: "Bearer " + sessionStorage.getItem("token") },
-      }) .then(()=> {
-      this.$router.push("/")
-    }).catch(err => console.log(err))
+      axios
+        .post("http://localhost:8000/api/post", formData, {
+          headers: {
+            Authorization: "Bearer " + sessionStorage.getItem("token"),
+          },
+        })
+        .then(() => {
+          this.$router.push("/");
+        })
+        .catch((err) => console.log(err));
     },
     setImageFile: function (event) {
       this.image = event.target.files[0];

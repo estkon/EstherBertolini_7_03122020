@@ -11,6 +11,7 @@
         class="form-control"
         v-model="email"
         placeholder="Email"
+        aria-label="email"
       />
     </div>
 
@@ -21,6 +22,7 @@
         class="form-control"
         v-model="password"
         placeholder="Password"
+        aria-label="mot de passe"
       />
     </div>
 
@@ -68,7 +70,7 @@ export default {
 
 <style scoped>
 .btn {
-  background-color: #f05454;
+  background-color: #30475e;
   color: white;
 }
 </style>
