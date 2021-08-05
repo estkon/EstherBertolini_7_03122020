@@ -28,7 +28,7 @@
       <img class="imagePreview" :src="url" width="100px" />
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Poster</button>
+    <button type="submit" class="btn btn-primary btn-block" title="poster">Poster</button>
   </form>
 </template>
 

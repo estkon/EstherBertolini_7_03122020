@@ -7,7 +7,7 @@
             </div>
             <form @submit="sendCommenter" v-if="ajouterCom"> 
               <textarea rows=3 class="form-control" placeholder="Votre commentaire ici" v-model="commentaire" ></textarea>
-              <button type="submit" aria-label="poster" class="btn btn-primary btn-block">Poster</button>
+              <button type="submit" aria-label="poster" class="btn btn-primary btn-block" title="poster">Poster</button>
            </form>
 </div>
 

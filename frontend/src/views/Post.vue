@@ -14,6 +14,7 @@
         <button
           type="submit"
           class="btn btn-primary btn-block"
+          title="poster"
         >
           Poster
         </button>

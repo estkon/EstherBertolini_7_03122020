@@ -26,7 +26,7 @@
       />
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
+    <button type="submit" class="btn btn-primary btn-block" title="connexion">Se connecter</button>
   </form>
 </template>
 

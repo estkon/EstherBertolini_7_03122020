@@ -38,7 +38,7 @@
 
     <div class="btn-group">
 
-        <button type="button" class="btn btn-primary btn-block" @click="deleteUser(user.id)"> Supprimer le compte</button>
+        <button type="button" title="supprimer mon compte" class="btn btn-primary btn-block" @click="deleteUser(user.id)"> Supprimer le compte</button>
      
     </div>
   </form>

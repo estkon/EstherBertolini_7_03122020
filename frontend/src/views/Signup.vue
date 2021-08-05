@@ -47,7 +47,7 @@
       />
     </div>
 
-    <button type="submit" class="btn btn btn-block">Inscription</button>
+    <button title="s'inscrire" type="submit" class="btn btn btn-block">S'inscrire</button>
   </form>
 </template>
 

@@ -7,7 +7,7 @@
       </p>
 
       <div v-if="user.isAdmin || post.User.id == user.id">
-        <button class="btn btn-sm btn-danger" @click="supprimerPost">
+        <button class="btn btn-sm btn-danger" @click="supprimerPost" title=" supprimer post">
           <span class="fa fa-trash"></span>Supprimer
         </button>
       </div>
@@ -19,6 +19,7 @@
             class="card-img"
             :src="'http://localhost:8000' + post.image"
             alt="Card image cap"
+            title="entrer sur ce post"
           />
         </router-link>
         <p class="card-text">{{ post.content }}</p>
@@ -82,7 +83,7 @@ export default {
 <style  scoped>
 .btn-danger {
   color: white;
-  background-color: #800000;
+  background-color: #ababab;
   border: none;
 }
 .btn-primary {
